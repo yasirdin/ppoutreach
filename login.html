@@ -1,0 +1,11 @@
+<div ng-controller="loginController">
+	<form class="form-signin">
+		<h2 class="form-signin-heading">Please enter username</h2>
+		<input type="text" id="username" class="form-control" placeholder="Username" ng-model="username">
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="remember-me"> Remember me
+			</label>
+		</div>
+		<button class="btn btn-lg btn-primary btn-block" ng-click="submit()">Sign in</button>
+</div>

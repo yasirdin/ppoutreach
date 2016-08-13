@@ -1,0 +1,33 @@
+<div>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <spre class="sr-only">Toggle navigation</spre>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href>Home</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Analysis</h3>
+        </div>
+        <div class="panel-body">
+            <h1>{{message}}</h1>
+            <!---<hist-directive data="data"></hist-directive>-->
+
+            <div class="ptHist"></div>
+            <input type="range" ng-model="slider">
+            <h2>(From controller) slider value: {{ slider }}</h2>
+        </div>
+    </div>
+</div>
