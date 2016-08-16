@@ -115,32 +115,26 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             .thresholds(scales.x.ticks(bincount))
             (data);
 
+        //temporary solution to binning problem, this redraws all data:
+        svg.selectAll(".cutbar").remove();
+
         //data bind
         var bar = svg.selectAll(".cutbar")
             .data(bins);
 
-        //enter
-        //each bar is appended to the svg as a group (<g>) element:
-        var gbar = bar.enter().append("g");
-
-        //update
-        gbar.attr("class", "cutbar")
+        var gbar = bar.enter().append("g")
+            .attr("class", "cutbar")
             .attr("transform", function (d) {
-                console.log(bins);
-                console.log(d);
                 return "translate(" + scales.x(d.x0) + "," + scales.y(d.length) + ")";
             });
 
-        var rect =  gbar.append("rect")
+        gbar.append("rect")
             .attr("width", function (d) {
                 return scales.x(d.x1) - scales.x(d.x0)
             })
             .attr("height", function (d) {
                 return height - scales.y(d.length);
             });
-
-        //remove bar's that are no longer in the data:
-        bar.exit().remove();
         
     }, true);
 
