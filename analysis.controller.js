@@ -30,8 +30,8 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             $scope.data = data;
 
             d3.select("input")
-                .attr("min", 120.317)
-                .attr("max", 130.579)
+                .attr("min", d3.min(data))
+                .attr("max", d3.max(data))
                 .attr("step", "any");
 
             scales.x = d3.scaleLinear()
@@ -80,7 +80,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
     // DATA CUTTER
     //cutting the data, given slider position and plot onto the same canvas:
-    $scope.$watch('slider', function(slider){
+    $scope.$watch('ptSlider', function(slider){
         if (!slider) { return; }
 
         //defining datacuts array:
@@ -115,7 +115,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             .thresholds(scales.x.ticks(bincount))
             (data);
 
-        //temporary solution to binning problem, this redraws all data:
+        //temporary solution to binning problem, this redraws all data (may be resource intensive):
         svg.selectAll(".cutbar").remove();
 
         //data bind

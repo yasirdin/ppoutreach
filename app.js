@@ -1,36 +1,27 @@
-var ppoutreach = angular.module('ppoutreach', ['ui.bootstrap']);
+var ppoutreach = angular.module('ppoutreach', ['ui.bootstrap', 'ui.router']);
 
-ppoutreach.config(['$routeProvider', function($routeProvider) {
-    $routeProvider
-        .when('/', {
-            templateUrl : 'login.html',
-            controller : 'loginController'
+ppoutreach.config(['$urlRouterProvider', '$stateProvider' , function($urlRouterProvider, $stateProvider) {
+    $urlRouterProvider.otherwise('/');
+    $stateProvider
+        .state('login', {
+            url: '/',
+            templateUrl: 'login.html',
+            controller: 'loginController'
         })
-        .when('/intro', {
-            resolve: {
-                'check': function ($location, $rootScope) {
-                    if (!$rootScope.loggedIn) {
-                        $location.path('/');
-                    }
-                }
-            },
+        .state('intro', {
+            url: '/intro',
             templateUrl: 'intro.html',
-            controller: 'introController'
+            controller: 'introController',
         })
-        .when('/dashboard', {
+        .state('dashboard', {
+            url: '/dashboard',
             templateUrl: 'dashboard.html',
             controller: 'dashboardController'
         })
-        
-        .when('/analysis', {
+        .state('analysis', {
+            url: 'analysis',
             templateUrl: 'analysis.html',
             controller: 'analysisController'
-        })
-            
-        .otherwise({
-            redirectTo: '/'
-        })
-    
+        }
+    )
 }]);
-
-
