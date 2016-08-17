@@ -1,5 +1,10 @@
 var ppoutreach = angular.module('ppoutreach', ['ui.bootstrap', 'ui.router']);
 
+//allows access to $state object on html, relevant for hiding header during login:
+ppoutreach.run(function($state, $rootScope){
+    $rootScope.$state = $state;
+});
+
 ppoutreach.config(['$urlRouterProvider', '$stateProvider' , function($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
@@ -19,7 +24,7 @@ ppoutreach.config(['$urlRouterProvider', '$stateProvider' , function($urlRouterP
             controller: 'dashboardController'
         })
         .state('analysis', {
-            url: 'analysis',
+            url: '/analysis',
             templateUrl: 'analysis.html',
             controller: 'analysisController'
         }

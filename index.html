@@ -1,15 +1,18 @@
-<!doctype html>
-<meta charset="UTF-8">
+<!DOCTYPE html>
+
 <html ng-app="ppoutreach">
 	<head>
 		<title>ppoutreach</title>
+
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
 		<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
 		<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.min.js"></script>
 		<script src="http://d3js.org/d3.v4.0.0-alpha.45.min.js" charset="utf-8"></script>
+
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="mystylesheet.css">
-	    <script src="app.js"></script>
+
+		<script src="app.js"></script>
 	    <script src="login.controller.js"></script>
 		<script src="intro.controller.js"></script>
 		<script src="dashboard.controller.js"></script>
@@ -17,6 +20,8 @@
 		<script src="analysis.directive.js"></script>
 	</head>
 	<body>
+		<header ng-include="'navbar.html'" ng-hide="$state.includes('login')"></header>
 		<div ui-view></div>
+		<footer ng-include="'footer.html'"></footer>
 	</body>
 </html>
