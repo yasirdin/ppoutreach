@@ -1,18 +1,11 @@
-<div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Analysis</h3>
-        </div>
-        <div class="panel-body">
-            <h1>{{message}}</h1>
-            <!---<hist-directive data="data"></hist-directive>-->
-
-            <div class="ptHist"></div>
-            <input type="range" ng-model="ptSlider">
-
-            <div class=""></div>
-            <h2>(From controller) slider value: {{ ptSlider }}</h2>
-        </div>
+<div class="container">
+    <div class="page-header">
+        <h1>Analysis Exercise</h1>
     </div>
+    <p class="lead">
+        <h1>pT</h1>
+        <div class="ptHist"></div>
+        <input type="range" ng-model="ptSlider">
+        <h2>(From controller) slider value: {{ ptSlider }}</h2>
+    </p>
 </div>

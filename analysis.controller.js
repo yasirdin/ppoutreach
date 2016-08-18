@@ -29,6 +29,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             //save data to the controllers $scope:
             $scope.data = data;
 
+            //setting sliders limits:
             d3.select("input")
                 .attr("min", d3.min(data))
                 .attr("max", d3.max(data))
@@ -54,7 +55,6 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             //data bind
             var bar = svg.selectAll(".bar")
                 .data(bins);
-
             //enter
             //each bar is appended to the svg as a group (<g>) element:
             var gbar = bar.enter().append("g");
@@ -70,11 +70,13 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
                     return scales.x(d.x1) - scales.x(d.x0)
                 })
                 .attr("height", function (d) {
-                    return height - scales.y(d.length);
+                    return height - scales.y(d.length)
                 });
 
             //update axis:
             axis.call(d3.axisBottom(scales.x));
+
+
         });
     };
 
@@ -129,6 +131,8 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             });
 
         gbar.append("rect")
+            .style("opacity", 0.5)
+            .attr("fill", "red")
             .attr("width", function (d) {
                 return scales.x(d.x1) - scales.x(d.x0)
             })
