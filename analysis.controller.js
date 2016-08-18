@@ -5,6 +5,25 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $location.path(path);
     };
 
+    //TODO: all of the processes dependent on data will be nested within this d3.json
+    //importing data:
+    d3.json("data/testdata.json", function(err, data) {
+        if (err) { throw err; }
+
+        //creating function to extract arrays for each variable:
+        function varExtract(data, col) {
+            return data.map(function(value, index) { return value[col]; });
+        }
+
+        //defining variable arrays:
+        $scope.mbb = varExtract(data, 0);
+        $scope.dr = varExtract(data, 1);
+        $scope.hpt = varExtract(data, 2);
+        $scope.taupt = varExtract(data, 3);
+        
+    });
+
+
     //TODO: this method of defining scales doesn't look right, find a more idomatic way to do this:
     //object for storing scales
     var scales = $scope.scales = {};
