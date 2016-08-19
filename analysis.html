@@ -6,6 +6,24 @@
         <h1>pT</h1>
         <div class="ptHist"></div>
         <input type="range" ng-model="ptSlider">
-        <h2>(From controller) slider value: {{ ptSlider }}</h2>
+        <h3>(From controller) slider value: {{ ptSlider }}</h3>
+
+        <h1>mbb</h1>
+        <div class="mbbHist"></div>
+        <input type="range" id="mbbSlider" ng-model="mbbSlider">
+        <h3>(From controller) slider value: {{ mbbSlider }}</h3>
+
+        <div class="dr"></div>
     </p>
+
+    <br>
+    <h2>Click on each variable tab to view the data and apply cuts</h2>
+
+    <uib-tabset active="activeJustified" justified="true">
+        <uib-tab index="0" heading=mbb>Plot and slider here</uib-tab>
+        <uib-tab index="1" heading=&Delta;r> Plot and slider here </uib-tab>
+        <uib-tab index="2" heading=hpT> Plot and slider here</uib-tab>
+        <uib-tab index="3" heading=&tau;pT> Plot and slider here</uib-tab>
+        <uib-tab index="4" heading="All variables"> Insert grid of all 4 variables.</uib-tab>
+    </uib-tabset>
 </div>

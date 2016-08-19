@@ -1,18 +1,85 @@
 ppoutreach.controller('analysisController', ['$scope', '$location', function ($scope, $location) {
-    $scope.message = 'Welcome to the analysis exercise';
 
     $scope.go = function(path) {
         $location.path(path);
     };
 
-    //TODO: all of the processes dependent on data will be nested within this d3.json
-    //importing data:
-    d3.json("data/testdata.json", function(err, data) {
+    $scope.plotConstants = {
+        margin: {top: 10, right: 50, bottom: 30, left:50},
+        width: 1000 - 50 - 50,
+        height: 500 - 10 - 30
+    };
+
+    //function for plotting static variable plot
+    $scope.histPlot = function(sliderId, data, histClass, bincount) {
+
+        //setting slider limits
+        d3.select(sliderId)
+            .attr("min", d3.min(data))
+            .attr("max", d3.max(data))
+            .attr("step", "any");
+
+        var c = $scope.plotConstants;
+
+        var svg = d3.select(histClass).append("svg")
+            .attr("width", c.width + c.margin.left)
+            .attr("height", c.height + c.margin.top + c.margin.bottom);
+
+        var axis = svg.append("g")
+            .attr("transform", "translate(0," + height + ")");
+
+        var x = d3.scaleLinear()
+            .domain([d3.min(data), d3.max(data)])
+            .rangeRound([0, width]);
+
+        //cutting input data into nested array of bins
+        var bins = d3.histogram()
+            .thresholds(x.ticks(bincount))
+            (data);
+
+        var y = d3.scaleLinear()
+            .domain([0, d3.max(bins, function (d) {
+                return d.length;
+            })])
+            .range([height, 0]);
+
+        //data bind
+        var bar = svg.selectAll(".bar")
+            .data(bins);
+        //enter
+        //each bar is appended to the svg as a group (<g>) element:
+        var gbar = bar.enter().append("g");
+
+        //update
+        gbar.attr("class", "bar")
+            .attr("stroke", "white")
+            .attr("transform", function (d) {
+                return "translate(" + x(d.x0) + "," + y(d.length) + ")";
+            })
+            .append("rect")
+            .attr("width", function (d) {
+                return x(d.x1) - x(d.x0)
+            })
+            .attr("height", function (d) {
+                return height - y(d.length)
+            });
+
+        //update axis:
+        axis.call(d3.axisBottom(x));
+    };
+
+    //IMPORTING DATA:
+    d3.json("data/hh4l.json", function(err, data) {
         if (err) { throw err; }
+
+        //saving data to the scope:
+        $scope.realData = data;
 
         //creating function to extract arrays for each variable:
         function varExtract(data, col) {
-            return data.map(function(value, index) { return value[col]; });
+            return data.map(function(value, index) {
+                return value[col];
+            })
         }
 
         //defining variable arrays:
@@ -20,18 +87,21 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $scope.dr = varExtract(data, 1);
         $scope.hpt = varExtract(data, 2);
         $scope.taupt = varExtract(data, 3);
-        
+
+        //plotting static histogram and slider:
+        $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 50);
+        //$scope.histPlot("#slider", $scope.dr, ".dr", 50);
     });
 
+    ////////////////////////////////////////////////////////////////////////////
 
-    //TODO: this method of defining scales doesn't look right, find a more idomatic way to do this:
     //object for storing scales
     var scales = $scope.scales = {};
 
     $scope.plotHist = function() {
         //defining constants (independent of the data)
         var margin = {top: 10, right: 50, bottom: 30, left: 50},
-            width = 960 - margin.left - margin.right,
+            width = 1000 - margin.left - margin.right,
             height = 500 - margin.top - margin.bottom;
 
         var svg = d3.select(".ptHist").append("svg")
@@ -94,8 +164,6 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
             //update axis:
             axis.call(d3.axisBottom(scales.x));
-
-
         });
     };
 

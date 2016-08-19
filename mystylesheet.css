@@ -5,6 +5,14 @@ body {
     background-color: white;
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
 .footer {
     position: absolute;
     bottom: 0;
@@ -107,6 +115,10 @@ body {
 
 circle {
     stroke-width: 2px;
+}
+
+form.tab-form-demo .tab-pane {
+    margin: 20px 20px;
 }
 /* end of test */
 
