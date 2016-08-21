@@ -69,7 +69,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
     };
 
     //IMPORTING DATA:
-    d3.json("data/hh4l.json", function(err, data) {
+    d3.json("data/hh4.json", function(err, data) {
         if (err) { throw err; }
 
         //saving data to the scope:
@@ -89,8 +89,8 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $scope.taupt = varExtract(data, 3);
 
         //plotting static histogram and slider:
-        $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 50);
-        //$scope.histPlot("#slider", $scope.dr, ".dr", 50);
+        $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 60);
+        $scope.histPlot("#drSlider", $scope.dr, ".drHist", 50);
     });
 
     ////////////////////////////////////////////////////////////////////////////
@@ -183,6 +183,8 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         }
 
         $scope.cutData = $scope.data.filter(cutCheck);
+
+        console.log($scope.cutData);
 
     });
 

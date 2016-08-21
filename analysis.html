@@ -2,28 +2,32 @@
     <div class="page-header">
         <h1>Analysis Exercise</h1>
     </div>
+
+    <h2>Click on each variable tab to view the data and apply cuts</h2>
+
+    <uib-tabset active="activeJustified" justified="true">
+        <uib-tab index="0" heading=mbb><br>insert mbb plot and slider</uib-tab>
+        <uib-tab index="1" heading=&Delta;r><br>insert dr plot and slider</uib-tab>
+        <uib-tab index="2" heading=hpT><br>insert hpt plot and slider</uib-tab>
+        <uib-tab index="3" heading=&tau;pT><br>insert taupt plot and slider</uib-tab>
+        <uib-tab index="4" heading="All variables"><br>insert grid of all 4 variables</uib-tab>
+    </uib-tabset>
+
     <p class="lead">
         <h1>pT</h1>
         <div class="ptHist"></div>
         <input type="range" ng-model="ptSlider">
-        <h3>(From controller) slider value: {{ ptSlider }}</h3>
+        <h3>(From controller) slider/cut value: {{ ptSlider }}</h3>
 
         <h1>mbb</h1>
         <div class="mbbHist"></div>
         <input type="range" id="mbbSlider" ng-model="mbbSlider">
-        <h3>(From controller) slider value: {{ mbbSlider }}</h3>
+        <h3>(From controller) slider/cut value: {{ mbbSlider }}</h3>
 
-        <div class="dr"></div>
+        <h1>dr</h1>
+        <div class="drHist"></div>
+        <input type="range" id="drSlider" ng-model="drSlider">
+        <h3>(From controller) slider/cut value: {{ drSlider }}</h3>
+
     </p>
-
-    <br>
-    <h2>Click on each variable tab to view the data and apply cuts</h2>
-
-    <uib-tabset active="activeJustified" justified="true">
-        <uib-tab index="0" heading=mbb>Plot and slider here</uib-tab>
-        <uib-tab index="1" heading=&Delta;r> Plot and slider here </uib-tab>
-        <uib-tab index="2" heading=hpT> Plot and slider here</uib-tab>
-        <uib-tab index="3" heading=&tau;pT> Plot and slider here</uib-tab>
-        <uib-tab index="4" heading="All variables"> Insert grid of all 4 variables.</uib-tab>
-    </uib-tabset>
 </div>

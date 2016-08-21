@@ -16,7 +16,7 @@ ppoutreach.config(['$urlRouterProvider', '$stateProvider' , function($urlRouterP
         .state('intro', {
             url: '/intro',
             templateUrl: 'intro.html',
-            controller: 'introController',
+            controller: 'introController'
         })
         .state('dashboard', {
             url: '/dashboard',

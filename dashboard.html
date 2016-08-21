@@ -1,11 +1,32 @@
 <div class="container">
     <div class="page-header">
-        <h3>Data</h3>
+        <h1>Data Dashboard</h1>
     </div>
     <p class="lead">
-        <h1>{{welcome}}</h1>
+
+        <h2>Click on each variable tab to find out more about the signal and background contributions</h2>
+
+        <uib-tabset active="activeJustified" justified="true">
+            <uib-tab index="0" heading=Backgrounds>
+                <br>
+                insert info on the backgrounds
+                <br>
+                <span>
+                    <button class="btn btn-lg btn-warning">Background 1</button>
+                    <button class="btn btn-lg btn-warning">Background 2</button>
+                </span>
+            </uib-tab>
+            <uib-tab index="1" heading=Signal>
+                <br>
+                insert info on signal
+                <br>
+                <button class="btn btn-lg btn-success" ng-click="go('/analysis')">Signal</button>
+            </uib-tab>
+        </uib-tabset>
+
+    <!-- old buttons, delete when alternative is implemented -
         <span>
-            <button class="btn btn-lg btn-warning">Background 1</button>
+
             <button class="btn btn-lg btn-info" ng-click="moreInfo('bg1')">Info</button>
         </span>
         <br>
@@ -19,8 +40,6 @@
             <button class="btn btn-lg btn-info" ng-click="moreInfo('sig')">Info</button>
         </span>
         <br>
-        <span>
-        <button class="btn-success" ng-click="go('/analysis')">Analysis</button>
-        </span>
+    -->
     </p>
 </div>
