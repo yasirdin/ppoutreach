@@ -10,7 +10,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         height: 500 - 10 - 30
     };
 
-    //function for plotting static variable plot
+    //function for plotting static variable histogram
     $scope.histPlot = function(sliderId, data, histClass, bincount) {
 
         //setting slider limits
@@ -23,7 +23,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
         var svg = d3.select(histClass).append("svg")
             .attr("width", c.width + c.margin.left)
-            .attr("height", c.height + c.margin.top + c.margin.bottom);
+            .attr("height", c.height + c.margin.top + c.margin.bottom)
 
         var axis = svg.append("g")
             .attr("transform", "translate(0," + height + ")");
@@ -68,14 +68,51 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         axis.call(d3.axisBottom(x));
     };
 
-    //IMPORTING DATA:
+    $scope.cutPlot = function(cutVariable, histClass, bincount) {
+        //watching cutVariable data:
+        $scope.$watch(cutVariable, function(data) {
+            //calling plot constants:
+            var c = $scope.plotConstants;
+
+            var svg = d3.select(histClass).select("svg");
+
+            var bins = d3.histogram()
+                .thresholds(scales.x.ticks(bincount))
+                (data);
+
+            svg.selectAll(".cutbar").remove();
+
+            //data bind
+            var bar = svg.selectAll(".cutbar")
+                .data(bins);
+
+            var gbar = bar.enter().append("g")
+                .attr("class", "cutbar")
+                .attr("transform", function (d) {
+                    return "translate(" + scales.x(d.x0) + "," + scales.y(d.length) + ")";
+                });
+
+            gbar.append("rect")
+                .style("opacity", 0.5)
+                .attr("fill", "red")
+                .attr("width", function (d) {
+                    return scales.x(d.x1) - scales.x(d.x0)
+                })
+                .attr("height", function (d) {
+                    return height - scales.y(d.length);
+                });
+
+        }, true);
+    };
+
+    //IMPORTING DATA and calling functions:
     d3.json("data/hh4.json", function(err, data) {
         if (err) { throw err; }
 
-        //saving data to the scope:
-        $scope.realData = data;
+        //saving data to the scope
+        $scope.mainData = data;
 
-        //creating function to extract arrays for each variable:
+        //creating function to extract arrays for each variable, put on $scope so reusable elsewhere:
         function varExtract(data, col) {
             return data.map(function(value, index) {
                 return value[col];
@@ -90,10 +127,45 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
         //plotting static histogram and slider:
         $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 60);
-        $scope.histPlot("#drSlider", $scope.dr, ".drHist", 50);
+        $scope.histPlot("#drSlider", $scope.dr, ".drHist", 60);
+
+        //TODO: functionise the following processes:
+
+        //creating object to store datacut values:
+        $scope.dataCuts = {};
+
+        //watching slider values to apply cuts to mainData:
+        $scope.$watch('mbbSlider', function(slider) {
+            if (!slider) { return; }
+
+            //appending cut value to $scope.dataCuts:
+            $scope.dataCuts.mbbCutVal = slider;
+            console.log($scope.dataCuts);
+
+            //function for filtering data
+            function cutCheck(entry) {
+                return entry[0] <= slider;
+            }
+
+            $scope.cuttingData = $scope.mainData.filter(cutCheck);
+
+            console.log($scope.cuttingData);
+        });
+
+        //watching mainData to dynamically adjust variable cut data:
+        $scope.$watch('cuttingData', function(data) {
+            //TODO: if not working, save the varExtract function to $scope:
+            $scope.mbbCut = varExtract(data, 0);
+            $scope.drCut = varExtract(data, 1);
+        }, true);
     });
 
-    ////////////////////////////////////////////////////////////////////////////
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////  TESTING  /////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     //object for storing scales
     var scales = $scope.scales = {};
@@ -231,7 +303,6 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         
     }, true);
 
-    //TODO: have the functions run within the d3.json callback
     //running the functions:
     $scope.plotHist();
 
