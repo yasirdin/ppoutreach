@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5b69412a-d133-4600-bb2e-d05b01908a3f" name="Default" comment="rounded down data to 3 decimal places">
+    <list default="true" id="5b69412a-d133-4600-bb2e-d05b01908a3f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysis.controller.js" afterPath="$PROJECT_DIR$/analysis.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/hh4.json" afterPath="$PROJECT_DIR$/data/hh4.json" />
     </list>
     <ignored path="ppoutreach_yasir.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,6 +24,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="23" column="87" selection-start-line="23" selection-start-column="87" selection-end-line="23" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="dashboard.controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dashboard.controller.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -68,8 +77,8 @@
       <file leaf-file-name="analysis.controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analysis.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="73" column="68" selection-start-line="73" selection-start-column="68" selection-end-line="73" selection-end-column="68" />
+            <state relative-caret-position="2358">
+              <caret line="158" column="66" selection-start-line="158" selection-start-column="66" selection-end-line="158" selection-end-column="66" />
               <folding />
             </state>
           </provider>
@@ -355,7 +364,7 @@
       <workItem from="1470221552055" duration="116258000" />
       <workItem from="1471129368752" duration="55583000" />
       <workItem from="1471515216550" duration="17194000" />
-      <workItem from="1471535197875" duration="52162000" />
+      <workItem from="1471535197875" duration="58287000" />
     </task>
     <task id="LOCAL-00001" summary="fixed issue with plotting re-binned cut data">
       <created>1471355032790</created>
@@ -413,11 +422,18 @@
       <option name="project" value="LOCAL" />
       <updated>1471961218147</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="rounded down data to 3 decimal places">
+      <created>1472037504984</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1472037504988</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="502280000" />
+    <option name="totallyTimeSpent" value="508405000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -750,14 +766,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="23" column="87" selection-start-line="23" selection-start-column="87" selection-end-line="23" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mystylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="879">
@@ -838,10 +846,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="23" column="87" selection-start-line="23" selection-start-column="87" selection-end-line="23" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/analysis.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="73" column="68" selection-start-line="73" selection-start-column="68" selection-end-line="73" selection-end-column="68" />
+        <state relative-caret-position="2358">
+          <caret line="158" column="66" selection-start-line="158" selection-start-column="66" selection-end-line="158" selection-end-column="66" />
           <folding />
         </state>
       </provider>

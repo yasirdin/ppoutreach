@@ -10,11 +10,12 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         height: 500 - 10 - 30
     };
 
-    //object for storing x-y scales:
-    var plotScales = $scope.plotScales = {};
+    //object to store x-y scales for plots for each variable
+    $scope.plotScales = {};
 
+    //TODO: make x-y definitions independent for each variable - store on $scope object
     //function for plotting static variable histogram
-    $scope.histPlot = function(sliderId, data, histClass, bincount) {
+    $scope.histPlot = function(sliderId, data, histClass, bincount, varName) {
 
         //setting slider limits
         d3.select(sliderId)
@@ -33,7 +34,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
         var x = d3.scaleLinear()
             .domain([d3.min(data), d3.max(data)])
-            .rangeRound([0, width]);
+            .rangeRound([0, c.width]);
 
         //cutting input data into nested array of bins
         var bins = d3.histogram()
@@ -42,8 +43,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
         var y = d3.scaleLinear()
             .domain([0, d3.max(bins, function (d) {
-                return d.length;
-            })])
+                return d.length; })])
             .range([height, 0]);
 
         //data bind
@@ -69,9 +69,13 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
         //update axis:
         axis.call(d3.axisBottom(x));
+
+        //appending x-y scales
+        $scope.plotScales[varName] = x;
+        $scope.plotScales[varName] = y;
     };
 
-    //TODO: make x-y scale definitions independent for each variable
+    //TODO: call x-y scale definitions for each variable
     $scope.cutPlot = function(cutVariable, histClass, bincount) {
         //watching cutVariable data:
         $scope.$watch(cutVariable, function(data) {
@@ -130,8 +134,8 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $scope.taupt = varExtract(data, 3);
 
         //plotting static histogram and slider:
-        $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 50);
-        $scope.histPlot("#drSlider", $scope.dr, ".drHist", 50);
+        $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 50, "mbb");
+        $scope.histPlot("#drSlider", $scope.dr, ".drHist", 50, "dr");
 
         //TODO: functionise the following processes:
 
