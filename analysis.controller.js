@@ -10,6 +10,9 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         height: 500 - 10 - 30
     };
 
+    //object for storing x-y scales:
+    var plotScales = $scope.plotScales = {};
+
     //function for plotting static variable histogram
     $scope.histPlot = function(sliderId, data, histClass, bincount) {
 
@@ -23,7 +26,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
         var svg = d3.select(histClass).append("svg")
             .attr("width", c.width + c.margin.left)
-            .attr("height", c.height + c.margin.top + c.margin.bottom)
+            .attr("height", c.height + c.margin.top + c.margin.bottom);
 
         var axis = svg.append("g")
             .attr("transform", "translate(0," + height + ")");
@@ -68,6 +71,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         axis.call(d3.axisBottom(x));
     };
 
+    //TODO: make x-y scale definitions independent for each variable
     $scope.cutPlot = function(cutVariable, histClass, bincount) {
         //watching cutVariable data:
         $scope.$watch(cutVariable, function(data) {
@@ -126,8 +130,8 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $scope.taupt = varExtract(data, 3);
 
         //plotting static histogram and slider:
-        $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 60);
-        $scope.histPlot("#drSlider", $scope.dr, ".drHist", 60);
+        $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 50);
+        $scope.histPlot("#drSlider", $scope.dr, ".drHist", 50);
 
         //TODO: functionise the following processes:
 
@@ -147,20 +151,16 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
                 return entry[0] <= slider;
             }
 
+            //filtering data:
             $scope.cuttingData = $scope.mainData.filter(cutCheck);
-
-            console.log($scope.cuttingData);
         });
 
         //watching mainData to dynamically adjust variable cut data:
         $scope.$watch('cuttingData', function(data) {
-            //TODO: if not working, save the varExtract function to $scope:
             $scope.mbbCut = varExtract(data, 0);
             $scope.drCut = varExtract(data, 1);
         }, true);
     });
-
-
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////  TESTING  /////////////////////////////////////////////////////////////////
