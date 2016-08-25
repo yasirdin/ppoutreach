@@ -111,9 +111,28 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             });
     };
 
-    //function for watching sliders and applying multiple cuts:
-    
+    //TODO: function for watching sliders and applying multiple cuts:
 
+    $scope.dataCuts = {};
+
+    $scope.sliderCut = function(sliderModel, varName) {
+        $scope.$watch(sliderModel, function(slider) {
+            if (!slider) { return; }
+
+            //appending slider/cut value to $scope stored object
+            $scope.dataCuts[varName] = slider;
+
+            //function for filtering data:
+            function cutCheck(entry) {
+                return entry[0] <= slider;
+            }
+
+            //filtering data:
+            $scope.cutMainData = $scope.mainData.filter(cutCheck);
+        });
+    };
+
+    //TODO: move out processes independent of data
     //IMPORTING DATA and calling functions:
     d3.json("data/hh4.json", function(err, data) {
         if (err) { throw err; }
@@ -139,27 +158,8 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $scope.histPlot("#drSlider", $scope.dr, ".drHist", 50, "dr");
         $scope.histPlot("#hptSlider", $scope.hpt, ".hptHist", 50, "hpt");
 
-        //TODO: functionise the following processes:
-
-        //creating object to store datacut values:
-        $scope.dataCuts = {};
-
-        //watching slider values to apply cuts to mainData:
-        $scope.$watch('mbbSlider', function(slider) {
-            if (!slider) { return; }
-
-            //appending cut value to $scope.dataCuts:
-            $scope.dataCuts.mbbCutVal = slider;
-            console.log($scope.dataCuts);
-
-            //function for filtering data
-            function cutCheck(entry) {
-                return entry[0] <= slider;
-            }
-
-            //filtering data:
-            $scope.cutMainData = $scope.mainData.filter(cutCheck);
-        });
+        //calling function to cut data given slider values:
+        $scope.sliderCut("mbbSlider", "mbb");
 
         //watching mainData to dynamically adjust variable cut data:
         $scope.$watch('cutMainData', function(data) {

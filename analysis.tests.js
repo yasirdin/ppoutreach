@@ -85,13 +85,13 @@ $scope.$watch('ptSlider', function(slider){
     if (!slider) { return; }
 
     //defining datacuts array:
-    dataCuts = {
+    dataCutsTest = {
         ptCut : slider
     };
 
     //filtering the data -- this works dynamically:
     function cutCheck(entry) {
-        return entry <= dataCuts.ptCut;
+        return entry <= dataCutsTest.ptCut;
     }
 
     $scope.cutData = $scope.data.filter(cutCheck);
