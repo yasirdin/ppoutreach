@@ -111,11 +111,10 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             });
     };
 
-    //TODO: function for watching sliders and applying multiple cuts:
-
+    //function for watching sliders and applying multiple cuts:
     $scope.dataCuts = {};
 
-    $scope.sliderCut = function(sliderModel, varName) {
+    $scope.sliderCut = function(sliderModel, varName, colNum) {
         $scope.$watch(sliderModel, function(slider) {
             if (!slider) { return; }
 
@@ -124,11 +123,12 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
             //function for filtering data:
             function cutCheck(entry) {
-                return entry[0] <= slider;
+                return entry[colNum] <= slider;
             }
 
             //filtering data:
             $scope.cutMainData = $scope.mainData.filter(cutCheck);
+            console.log($scope.cutMainData);
         });
     };
 
@@ -159,7 +159,9 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $scope.histPlot("#hptSlider", $scope.hpt, ".hptHist", 50, "hpt");
 
         //calling function to cut data given slider values:
-        $scope.sliderCut("mbbSlider", "mbb");
+        $scope.sliderCut("mbbSlider", "mbb", 0);
+        $scope.sliderCut("drSlider", "dr", 1);
+        $scope.sliderCut("hptSlider", "hpt", 2);
 
         //watching mainData to dynamically adjust variable cut data:
         $scope.$watch('cutMainData', function(data) {
@@ -173,11 +175,9 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             $scope.cutPlot(".mbbHist", data, 50, "mbb");
         }, true);
 
-
         $scope.$watch('drCut', function(data) {
             $scope.cutPlot(".drHist", data, 50, "dr");
         }, true);
-
 
         $scope.$watch('hptCut', function(data) {
             $scope.cutPlot(".hptHist", data, 50, "hpt");
