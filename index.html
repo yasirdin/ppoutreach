@@ -45,16 +45,20 @@
         <!-- toolbar: -->
 		<md-toolbar>
             <div class="md-toolbar-tools">
-                <md-button ng-click="openLeftMenu()" class="md-icon-button" aria-label="Settings">
+                <md-button class="md-icon-button" aria-label="Settings" ng-click="openLeftMenu()">
                     <i class="material-icons">menu</i>
                 </md-button>
                 <h1><span>PPoutreach</span></h1>
                 <span flex></span>
-                <md-button class="md-icon-button" aria-label="More">
-                    <i class="material-icons">more_vert</i>
-                </md-button>
+                <md-menu>
+                    <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                        <i class="material-icons">more_vert</i>
+                    </md-button>
+                    <md-menu-content>
+                        <md-menu-item><md-button ng-click="logout()">Logout</md-button></md-menu-item>
+                    </md-menu-content>
+                </md-menu>
             </div>
-
 		</md-toolbar>
 
 		<div layout="row" flex>
@@ -68,7 +72,7 @@
                         </md-list-item>
                     </md-list>
                 </md-sidenav>
-
+                <!-- ui-router view: -->
 				<ui-view></ui-view>
 			</md-content>
 		</div>
