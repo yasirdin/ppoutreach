@@ -1,4 +1,4 @@
-var ppoutreach = angular.module('ppoutreach', ['ui.bootstrap', 'ui.router']);
+var ppoutreach = angular.module('ppoutreach', ['ui.bootstrap', 'ui.router', 'ngRangeSlider', 'ngMaterial', 'ngMdIcons']);
 
 //allows access to $state object on html, relevant for hiding header during login:
 ppoutreach.run(function($state, $rootScope){

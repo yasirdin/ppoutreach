@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="ppoutreach">
+<html>
 	<head>
 		<title>ppoutreach</title>
 
@@ -12,6 +12,9 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="mystylesheet.css">
 
+		<!--ng-range-slider-->
+		<script src="bower_components/ng-range-slider/dist/ng-range-slider.js"></script>
+
 		<!-- app and controllers -->
 		<script src="app.js"></script>
 	    <script src="login.controller.js"></script>
@@ -19,10 +22,55 @@
 		<script src="dashboard.controller.js"></script>
 		<script src="analysis.controller.js"></script>
 		<script src="analysis.directive.js"></script>
+		<script src="main.controller.js"></script>
+
+		<!-- Angular Material Dependencies -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
+
+		<!-- Angular Material CSS now available via Google CDN; version 0.9.4 used here -->
+		<link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.min.css"/>
+
+		<!-- Angular Material Javascript using GitCDN to load directly from `bower-material/master` -->
+		<script src="https://gitcdn.link/repo/angular/bower-material/master/angular-material.js"></script>
+
+		<!-- ngMdIcons -->
+		<script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
+
+		<!-- material icons: -->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 	</head>
-	<body>
-		<header ng-include="'navbar.html'" ng-hide="$state.includes('login')"></header>
-		<div ui-view></div>
-		<footer ng-include="'footer.html'"></footer>
+	<body ng-cloak ng-app="ppoutreach" layout="column" ng-controller="mainController">
+        <!-- toolbar: -->
+		<md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="openLeftMenu()" class="md-icon-button" aria-label="Settings">
+                    <i class="material-icons">menu</i>
+                </md-button>
+                <h1><span>PPoutreach</span></h1>
+                <span flex></span>
+                <md-button class="md-icon-button" aria-label="More">
+                    <i class="material-icons">more_vert</i>
+                </md-button>
+            </div>
+
+		</md-toolbar>
+
+		<div layout="row" flex>
+            <!-- content (everything under md-toolbar-->
+			<md-content flex id="content" class="lightgreen">
+                <!-- sidenav: -->
+                <md-sidenav md-component-id="left" class="md-sidenav-left">
+                    <md-list>
+                        <md-list-item>
+                            <md-button>Page 1</md-button>
+                        </md-list-item>
+                    </md-list>
+                </md-sidenav>
+
+				<ui-view></ui-view>
+			</md-content>
+		</div>
 	</body>
 </html>

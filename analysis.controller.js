@@ -1,5 +1,7 @@
 ppoutreach.controller('analysisController', ['$scope', '$location', function ($scope, $location) {
 
+    $scope.testing = {from:0, to:10};
+
     $scope.go = function(path) {
         $location.path(path);
     };
@@ -21,7 +23,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         d3.select(sliderId)
             .attr("min", d3.min(data))
             .attr("max", d3.max(data))
-            .attr("step", "any");
+            .attr("step", "0.001");
 
         var c = $scope.plotConstants;
 
@@ -128,12 +130,12 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
             //filtering data:
             $scope.cutMainData = $scope.mainData.filter(cutCheck);
-            console.log($scope.cutMainData);
         });
     };
 
-    //TODO: move out processes independent of data
-    //IMPORTING DATA and calling functions:
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                        //importing data and calling functions:
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     d3.json("data/hh4.json", function(err, data) {
         if (err) { throw err; }
 
