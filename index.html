@@ -40,6 +40,9 @@
 		<!-- material icons: -->
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+        <!-- roboto font: -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+
 	</head>
 	<body ng-cloak ng-app="ppoutreach" layout="column" ng-controller="mainController">
         <!-- toolbar: -->
@@ -65,7 +68,13 @@
             <!-- content (everything under md-toolbar-->
 			<md-content flex id="content" class="lightgreen">
                 <!-- sidenav: -->
-                <md-sidenav md-component-id="left" class="md-sidenav-left">
+                <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2">
+                    <div layout="column" class="md-toolbar-tools-bottom inset">
+                        <!-- avatar goes here -->
+                        <span></span>
+                        <div>Firstname Lastname</div>
+                        <div>email@domainname.com</div>
+                    </div>
                     <md-list>
                         <md-list-item>
                             <md-button>Page 1</md-button>

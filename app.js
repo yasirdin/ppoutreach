@@ -5,6 +5,15 @@ ppoutreach.run(function($state, $rootScope){
     $rootScope.$state = $state;
 });
 
+//angular theming:
+ppoutreach.config(function($mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+        .primaryPalette('blue')
+        .accentPalette('orange');
+        //.warnPalette('default')
+        //.backgroundPalette('default');
+});
+
 ppoutreach.config(['$urlRouterProvider', '$stateProvider' , function($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
