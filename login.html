@@ -1,10 +1,21 @@
-<form class="form-signin">
-	<h2 class="form-signin-heading">Please enter username</h2>
-	<input type="text" id="username" class="form-control" placeholder="Username" ng-model="username">
-	<div class="checkbox">
-		<label>
-			<input type="checkbox" value="remember-me"> Remember me
-		</label>
-	</div>
+<!-- putting login form on a material card: -->
 
-<md-button class="md-primary" ng-click="submit()">Sign in</md-button>
+<div class="login">
+	<md-card>
+		<md-card-title>
+			<md-card-title-text>
+				<span class="md-headline">Welcome!</span>
+				<span class="md-subhead">Please login:</span>
+			</md-card-title-text>
+		</md-card-title>
+		<md-card-content>
+			<div layout="column">
+				<md-input-container>
+					<label>Username</label>
+					<input ng-model="username">
+				</md-input-container>
+				<md-button class="md-raised md-primary" ng-click="submit()" type="submit">Sign in</md-button>
+			</div>
+		</md-card-content>
+	</md-card>
+</div>

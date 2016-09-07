@@ -3,7 +3,7 @@ ppoutreach.controller('loginController', ['$scope', '$location', '$rootScope', f
         var uname = $scope.username;
         if (uname == 'admin'){
             $rootScope.loggedIn = true;
-            $location.path('/intro');
+            $location.path('/selection');
         }
         else {
             alert('Username not unrecognised, please type admin')

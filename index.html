@@ -9,7 +9,6 @@
 		<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.2.js"></script>
 		<script src="http://d3js.org/d3.v4.0.0-alpha.45.min.js" charset="utf-8"></script>
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="mystylesheet.css">
 
 		<!--ng-range-slider-->
@@ -23,6 +22,7 @@
 		<script src="analysis.controller.js"></script>
 		<script src="analysis.directive.js"></script>
 		<script src="main.controller.js"></script>
+        <script src="selection.controller.js"></script>
 
 		<!-- Angular Material Dependencies -->
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
@@ -32,7 +32,7 @@
 		<link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.min.css"/>
 
 		<!-- Angular Material Javascript using GitCDN to load directly from `bower-material/master` -->
-		<script src="https://gitcdn.link/repo/angular/bower-material/master/angular-material.js"></script>
+		<script src="https://gitcdn.link/repo/angular/bower-material/master/angular-material.min.js"></script>
 
 		<!-- ngMdIcons -->
 		<script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
@@ -64,9 +64,9 @@
             </div>
 		</md-toolbar>
 
-		<div layout="row" flex>
+		<div layout="column" layout-fill flex>
             <!-- content (everything under md-toolbar-->
-			<md-content flex id="content" class="lightgreen">
+			<md-content flex id="content" layout-padding>
                 <!-- sidenav: -->
                 <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2">
                     <div layout="column" class="md-toolbar-tools-bottom inset">
@@ -82,8 +82,8 @@
                     </md-list>
                 </md-sidenav>
                 <!-- ui-router view: -->
-				<ui-view></ui-view>
+                    <ui-view></ui-view>
 			</md-content>
 		</div>
-	</body>
+    </body>
 </html>

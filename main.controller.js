@@ -1,4 +1,4 @@
-ppoutreach.controller("mainController", ['$scope', '$mdSidenav', '$location', function($scope, $mdSidenav, $location) {
+ppoutreach.controller("mainController", ['$scope', '$mdSidenav', '$location', '$rootScope', function($scope, $mdSidenav, $location, $rootScope) {
     $scope.openLeftMenu = function() {
         $mdSidenav('left').toggle();
     };

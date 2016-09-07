@@ -1,0 +1,21 @@
+<div layout="row" layout-align="center center">
+    <ul>
+        <li ng-repeat="subject in subjects">
+            <md-card>
+                <md-card-content layout="column">
+                    <h2>{{subject.name}}</h2>
+                    <p>
+                        A short abstract outlining the subject.
+                    </p>
+
+                    <md-button class="btn1 md-primary md-raised" href="{{subject.link}}">
+                        <span>
+                        Go!
+                        </span>
+                    </md-button>
+                </md-card-content>
+            </md-card>
+
+        </li>
+    </ul>
+</div>

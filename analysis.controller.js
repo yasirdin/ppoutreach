@@ -1,10 +1,39 @@
 ppoutreach.controller('analysisController', ['$scope', '$location', function ($scope, $location) {
 
-    $scope.testing = {from:0, to:10};
-
-    $scope.go = function(path) {
-        $location.path(path);
+    //TODO: setup datacutter to append cut value to this object
+    //variables titles etc for ng-repeat's.
+    $scope.datasets = {
+        "hh4": {
+            "variables": [
+                {name: "mbb"},
+                {name: "dr"},
+                {name: "hpt"},
+                {name: "taupt"}
+            ],
+            "cutVals" : [
+                {"mbb": null},
+                {"dr": null},
+                {"hpt": null},
+                {"taupt": null}
+            ]
+        },
+        "ttbar3": {
+            "variables" : [
+                {name: "mbb"},
+                {name: "dr"},
+                {name: "hpt"},
+                {name: "taupt"}
+            ],
+            "cutVals" : [
+                {"mbb": null},
+                {"dr": null},
+                {"hpt": null},
+                {"taupt": null}
+            ]
+        }
     };
+
+    $scope.testing = {from:0, to:10};
 
     $scope.plotConstants = {
         margin: {top: 10, right: 50, bottom: 30, left:50},
@@ -78,7 +107,6 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $scope.plotScales[varName].y = y;
     };
 
-    //TODO: call x-y scale definitions for each variable
     $scope.cutPlot = function(histClass, data, bincount, varName) {
         //calling plot constants:
         var c = $scope.plotConstants;
@@ -144,9 +172,11 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
         //creating function to extract arrays for each variable, put on $scope so reusable elsewhere:
         function varExtract(data, col) {
-            return data.map(function(value, index) {
-                return value[col];
-            })
+            if (data) {
+                return data.map(function(value, index) {
+                    return value[col];
+                });
+            }
         }
 
         //defining variable arrays:
@@ -174,16 +204,22 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
 
         //setting up $watch'ers to plot cutData
         $scope.$watch('mbbCut', function(data) {
-            $scope.cutPlot(".mbbHist", data, 50, "mbb");
-        }, true);
+            if (data) {
+                $scope.cutPlot(".mbbHist", data, 50, "mbb");
+            }
+        });
 
         $scope.$watch('drCut', function(data) {
-            $scope.cutPlot(".drHist", data, 50, "dr");
-        }, true);
+            if (data) {
+                $scope.cutPlot(".drHist", data, 50, "dr");
+            }
+        });
 
         $scope.$watch('hptCut', function(data) {
-            $scope.cutPlot(".hptHist", data, 50, "hpt");
-        }, true);
+            if (data) {
+                $scope.cutPlot(".hptHist", data, 50, "hpt");
+            }
+        });
     });
 }]);
 

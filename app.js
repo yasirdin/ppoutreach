@@ -22,6 +22,11 @@ ppoutreach.config(['$urlRouterProvider', '$stateProvider' , function($urlRouterP
             templateUrl: 'login.html',
             controller: 'loginController'
         })
+        .state('selection', {
+            url: '/selection',
+            templateUrl: 'selection.html',
+            controller: 'selectionController'
+        })
         .state('intro', {
             url: '/intro',
             templateUrl: 'intro.html',

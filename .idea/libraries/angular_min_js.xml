@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="angular.min.js" type="javaScript">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/bower_components/angular/angular.min.js" />
+      <root url="file://$PROJECT_DIR$/bower_components/angular-material/angular-material.min.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
