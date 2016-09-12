@@ -10,6 +10,8 @@
 		<script src="http://d3js.org/d3.v4.0.0-alpha.45.min.js" charset="utf-8"></script>
 
 		<link rel="stylesheet" type="text/css" href="mystylesheet.css">
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+        <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.min.css"/>
 
 		<!--ng-range-slider-->
 		<script src="bower_components/ng-range-slider/dist/ng-range-slider.js"></script>
@@ -28,11 +30,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
 
-		<!-- Angular Material CSS now available via Google CDN; version 0.9.4 used here -->
-		<link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.min.css"/>
-
-		<!-- Angular Material Javascript using GitCDN to load directly from `bower-material/master` -->
-		<script src="https://gitcdn.link/repo/angular/bower-material/master/angular-material.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.1/angular-material.min.js"></script>
 
 		<!-- ngMdIcons -->
 		<script src="//cdn.jsdelivr.net/angular-material-icons/0.4.0/angular-material-icons.min.js"></script>
@@ -44,9 +42,9 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
 
 	</head>
-	<body ng-cloak ng-app="ppoutreach" layout="column" ng-controller="mainController">
-        <!-- toolbar: -->
-		<md-toolbar>
+	<body layout="column" ng-cloak ng-app="ppoutreach" ng-controller="mainController">
+
+        <md-toolbar class="main-toolbar">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" aria-label="Settings" ng-click="openLeftMenu()">
                     <i class="material-icons">menu</i>
@@ -62,28 +60,41 @@
                     </md-menu-content>
                 </md-menu>
             </div>
-		</md-toolbar>
+        </md-toolbar>
 
-		<div layout="column" layout-fill flex>
-            <!-- content (everything under md-toolbar-->
-			<md-content flex id="content" layout-padding>
-                <!-- sidenav: -->
-                <md-sidenav md-component-id="left" class="md-sidenav-left md-whiteframe-z2">
+        <div layout="row" layout-fill role="main">
+
+            <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-disable-backdrop md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+                <md-toolbar class="md-tall">
+                    <span flex></span>
                     <div layout="column" class="md-toolbar-tools-bottom inset">
-                        <!-- avatar goes here -->
+                        <user-avatar></user-avatar>
                         <span></span>
                         <div>Firstname Lastname</div>
                         <div>email@domainname.com</div>
                     </div>
-                    <md-list>
-                        <md-list-item>
-                            <md-button>Page 1</md-button>
-                        </md-list-item>
-                    </md-list>
-                </md-sidenav>
+                </md-toolbar>
+                <md-list>
+                    <md-subheader class="md-no-sticky">Favorites</md-subheader>
+                    <md-item ng-repeat="item in menu">
+                        <a>
+                            <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                                <div class="inset">
+                                    {{item.title}}
+                                </div>
+                            </md-item-content>
+                        </a>
+                    </md-item>
+                </md-list>
+            </md-sidenav>
+
+
+            <md-content layout="column" flex md-scroll-y>
                 <!-- ui-router view: -->
-                    <ui-view></ui-view>
-			</md-content>
-		</div>
+                <ui-view layout="column" layout-fill layout-padding></ui-view>
+            </md-content>
+        </div>
+
+
     </body>
 </html>

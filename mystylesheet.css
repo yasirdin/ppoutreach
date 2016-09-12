@@ -258,3 +258,8 @@ ul {
     outline: none;
 }
 
+
+.main-toolbar {
+    /* toolbar has z-index: 61 */
+    z-index: 61;
+}

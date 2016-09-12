@@ -1,36 +1,65 @@
-<div>
+<!-- TODO: ng-repeat the plots and filter according to dataset selection defined by the user -->
 
-    <h2>Analysis Exercise</h2>
+<div layout-align="center center">
 
-    <md-tabs ng-repeat="variable in datasets.hh4.variables">
-        <md-tab label="{{ variable.name }}"></md-tab>
-    </md-tabs>
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">dataset selector</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <span>Toggle different datasets using the switches below.</span>
+        </md-card-content>
+    </md-card>
 
-    <p class="lead">
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">mbb</span>
+                <span class="md-subhead"><i>what is mbb?</i></span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <div class="mbbHist"></div>
+            <input type="range" id="mbbSlider" ng-model="mbbSlider">
+            <br>
+            <span>(from controller) slider/cut value: {{ mbbSlider }}</span>
+        </md-card-content>
+    </md-card>
 
-        <h1>mbb</h1>
-        <div class="mbbHist"></div>
-        <input type="range" id="mbbSlider" ng-model="mbbSlider">
-        <h3>(From controller) slider/cut value: {{ mbbSlider }}</h3>
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">dr</span>
+                <span class="md-subhead"><i>what is dr?</i></span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <div class="drHist"></div>
+            <input type="range" id="drSlider" ng-model="drSlider">
+            <br>
+            <span>(from controller) slider/cut value: {{ drSlider }}</span>
+        </md-card-content>
+    </md-card>
 
-        <h1>dr</h1>
-        <div class="drHist"></div>
-        <input type="range" id="drSlider" ng-model="drSlider">
-        <h3>(From controller) slider/cut value: {{ drSlider }}</h3>
-
-        <h1>hpt</h1>
-        <div class="hptHist"></div>
-        <input type="range" id="hptSlider" ng-model="hptSlider">
-        <h3>(From controller) slider/cut calue: {{ hptSlider }}</h3>
-
-        <h1>ng-range-slider</h1>
-        <section data-range-slider ng-model="testing"></section>
-        <h3> {{ testing }} </h3>
-
-    </p>
-
-
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">hpt</span>
+                <span class="md-subhead"><i>what is hpt?</i></span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <div class="hptHist"></div>
+            <input type="range" id="hptSlider" ng-model="hptSlider">
+            <br>
+            <span>(from controller) slider/cut value: {{ hptSlider }}</span>
+        </md-card-content>
+    </md-card>
 </div>
+
+
 
 <!-- test hist:
 <h1>pT test</h1>
