@@ -25,6 +25,14 @@
             <input type="range" id="mbbSlider" ng-model="mbbSlider">
             <br>
             <span>(from controller) slider/cut value: {{ mbbSlider }}</span>
+
+            <md-slider-container>
+                <span>Cut slider</span>
+                <md-slider flex min="0" max="100" ng-model="testslider"></md-slider>
+                <md-input-container>
+                    <input flex type="number" ng-model="testslider">
+                </md-input-container>
+            </md-slider-container>
         </md-card-content>
     </md-card>
 

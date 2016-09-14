@@ -49,7 +49,7 @@
                 <md-button class="md-icon-button" aria-label="Settings" ng-click="openLeftMenu()">
                     <i class="material-icons">menu</i>
                 </md-button>
-                <h1><span>PPoutreach</span></h1>
+                <h1><span>PPoutreach > {{ $state.current.name }}</span></h1>
                 <span flex></span>
                 <md-menu>
                     <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
@@ -75,7 +75,6 @@
                     </div>
                 </md-toolbar>
                 <md-list>
-                    <md-subheader class="md-no-sticky">Favorites</md-subheader>
                     <md-item ng-repeat="item in menu">
                         <a>
                             <md-item-content md-ink-ripple layout="row" layout-align="start center">

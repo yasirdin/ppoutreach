@@ -1,5 +1,4 @@
 ppoutreach.controller('analysisController', ['$scope', '$location', function ($scope, $location) {
-
     //TODO: setup datacutter to append cut value to this object
     //variables titles etc for ng-repeat's.
     $scope.datasets = {
