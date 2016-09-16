@@ -6,10 +6,10 @@
 		<!-- dependencies -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 		<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
-		<script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.2.js"></script>
 		<script src="http://d3js.org/d3.v4.0.0-alpha.45.min.js" charset="utf-8"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-cookies.min.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="mystylesheet.css">
+        <link rel="stylesheet" type="text/css" href="mystylesheet.css">
         <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
         <link rel="stylesheet" href="https://rawgit.com/angular/bower-material/master/angular-material.min.css"/>
 
@@ -42,17 +42,18 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
 
 	</head>
-	<body layout="column" ng-cloak ng-app="ppoutreach" ng-controller="mainController">
+	<body layout-fill layout="column" ng-cloak ng-app="ppoutreach" ng-controller="mainController">
 
-        <md-toolbar class="main-toolbar">
+
+        <md-toolbar class="main-toolbar" ng-hide="$state.includes('Login')">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" aria-label="Settings" ng-click="openLeftMenu()">
                     <i class="material-icons">menu</i>
                 </md-button>
-                <h1><span>PPoutreach > {{ $state.current.name }}</span></h1>
+                <h1><span>PPoutreach > {{ $state.current.name }} > {{ cookieVal }}</span></h1>
                 <span flex></span>
                 <md-menu>
-                    <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                    <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)" >
                         <i class="material-icons">more_vert</i>
                     </md-button>
                     <md-menu-content>
@@ -62,9 +63,8 @@
             </div>
         </md-toolbar>
 
-        <div layout="row" layout-fill role="main">
-
-            <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-disable-backdrop md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+        <md-content flex layout="row">
+            <md-sidenav ng-hide="$state.includes('Login')" layout-fill layout="column" class="md-sidenav-left md-whiteframe-z2" md-disable-backdrop md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
                 <md-toolbar class="md-tall">
                     <span flex></span>
                     <div layout="column" class="md-toolbar-tools-bottom inset">
@@ -87,12 +87,9 @@
                 </md-list>
             </md-sidenav>
 
+            <ui-view flex></ui-view>
+        </md-content>
 
-            <md-content layout="column" flex md-scroll-y>
-                <!-- ui-router view: -->
-                <ui-view layout="column" layout-fill layout-padding></ui-view>
-            </md-content>
-        </div>
 
 
     </body>

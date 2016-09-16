@@ -188,17 +188,20 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 50, "mbb");
         $scope.histPlot("#drSlider", $scope.dr, ".drHist", 50, "dr");
         $scope.histPlot("#hptSlider", $scope.hpt, ".hptHist", 50, "hpt");
+        $scope.histPlot("#tauptSlider", $scope.taupt, ".tauptHist", 50, "taupt")
 
         //calling function to cut data given slider values:
         $scope.sliderCut("mbbSlider", "mbb", 0);
         $scope.sliderCut("drSlider", "dr", 1);
         $scope.sliderCut("hptSlider", "hpt", 2);
+        $scope.sliderCut("tauptSlider", "tauput", 3);
 
         //watching mainData to dynamically adjust variable cut data:
         $scope.$watch('cutMainData', function(data) {
             $scope.mbbCut = varExtract(data, 0);
             $scope.drCut = varExtract(data, 1);
             $scope.hptCut = varExtract(data, 2);
+            $scope.tauptCut = varExtract(data, 3);
         }, true);
 
         //setting up $watch'ers to plot cutData
@@ -217,6 +220,12 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $scope.$watch('hptCut', function(data) {
             if (data) {
                 $scope.cutPlot(".hptHist", data, 50, "hpt");
+            }
+        });
+
+        $scope.$watch('tauptCut', function(data) {
+            if (data) {
+                $scope.cutPlot(".tauptHist", data, 50, "taupt");
             }
         });
     });

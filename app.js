@@ -1,11 +1,34 @@
-var ppoutreach = angular.module('ppoutreach', ['ui.bootstrap', 'ui.router', 'ngRangeSlider', 'ngMaterial', 'ngMdIcons']);
+var ppoutreach = angular.module('ppoutreach', ['ui.router', 'ngRangeSlider', 'ngMaterial', 'ngMdIcons', 'ngCookies']);
+
+//cookies service, putting cookie functions in service makes it accessible to all controllers:
+ppoutreach.factory('userPersistenceService', ['$cookies', function($cookies) {
+    //placeholder:
+    var userName = "";
+
+    return {
+        setCookieData: function(username) {
+            userName = username;
+            $cookies.put("userName", username);
+        },
+
+        getCookieData: function() {
+            userName = $cookies.get("userName");
+            return userName;
+        },
+
+        clearCookieData: function() {
+            userName = "";
+            $cookie.remove("userName");
+        }
+    }
+}]);
 
 //allows access to $state object on html, relevant for hiding header during login:
 ppoutreach.run(function($state, $rootScope){
     $rootScope.$state = $state;
 });
 
-//angular theming:
+//angular theme:
 ppoutreach.config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')
@@ -58,5 +81,4 @@ ppoutreach.run(['$rootScope', '$state', '$stateParams', function($rootScope, $st
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
 }]);
-
 
