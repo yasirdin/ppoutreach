@@ -1,28 +1,17 @@
-<div class="container">
-    <div class="page-header">
-        <h1>Data Dashboard</h1>
-    </div>
-    <p class="lead">
+<div layout-padding>
+    <h1>Data Dashboard</h1>
 
-        <h2>Click on each variable tab to find out more about the signal and background contributions</h2>
+    <md-button class="md-warn bgbutton md-raised">
+        Background 1
+    </md-button>
 
-        <uib-tabset active="activeJustified" justified="true">
-            <uib-tab index="0" heading=Backgrounds>
-                <br>
-                insert info on the backgrounds
-                <br>
-                <span>
-                    <button class="btn btn-lg btn-warning">Background 1</button>
-                    <button class="btn btn-lg btn-warning">Background 2</button>
-                </span>
-            </uib-tab>
-            <uib-tab index="1" heading=Signal>
-                <br>
-                insert info on signal
-                <br>
-                <button class="btn btn-lg btn-success" ng-click="go('/analysis')">Signal</button>
-            </uib-tab>
-        </uib-tabset>
+    <md-button class="md-warn bgbutton md-raised">
+        Background 2
+    </md-button>
+
+    <md-button class="md-primary signalbtn md-raised" ng-click="go('/analysis')">
+        Signal
+    </md-button>
 
     <!-- old buttons, delete when alternative is implemented -
         <span>
@@ -41,5 +30,6 @@
         </span>
         <br>
     -->
-    </p>
 </div>
+
+

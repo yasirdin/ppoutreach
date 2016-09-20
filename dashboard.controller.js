@@ -2,5 +2,6 @@ ppoutreach.controller('dashboardController', ['$scope', '$location', function($s
     
     $scope.go = function(path) {
         $location.path(path);
-    };
+    };  
+    
 }]);

@@ -1,18 +1,21 @@
 <!-- putting login form on a material card: -->
 
-<div class="login" layout-align="center center">
-	<md-card>
+<div class="login" layout-align="center center" layout="row">
+	<md-card flex="60">
+		<md-toolbar layout-padding layout-align="center center">
+			<span class="md-toolbar-item md-headline">Login</span>
+		</md-toolbar>
 		<md-card-title>
 			<md-card-title-text>
-				<span class="md-headline">Welcome!</span>
-				<span class="md-subhead">Please login:</span>
+				<span class="md-headline">Login</span>
+				<span class="md-subhead">Please enter your username:</span>
 			</md-card-title-text>
 		</md-card-title>
 		<md-card-content>
 			<div layout="column">
 				<md-input-container>
 					<label>Username</label>
-					<input ng-model="username">
+					<input flex ng-model="username">
 				</md-input-container>
 				<md-button class="md-raised md-primary" ng-click="submit()" type="submit">Sign in</md-button>
 			</div>

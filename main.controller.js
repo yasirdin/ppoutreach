@@ -24,6 +24,10 @@ ppoutreach.controller("mainController", ['$scope', '$mdSidenav', '$location', '$
         {title: 'Subject selection'},
         {title: 'Introduction'},
         {title: 'Data'},
-        {title: 'Analysis exercise'}
+        {title: 'Analysis exercise'},
+        {title: 'Report Writing'}
     ];
+
+    
+
 }]);

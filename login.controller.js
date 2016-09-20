@@ -9,6 +9,7 @@ ppoutreach.controller('loginController', ['$scope', '$location', '$rootScope', f
             alert('Username not unrecognised, please type admin')
         }
     };
+
 }]);
 
 

@@ -1,4 +1,4 @@
-<!-- TODO: ng-repeat the plots and filter according to dataset and vairables selection defined by the user -->
+<!-- TODO: ng-repeat the plots and filter according to dataset and variables selection defined by the user -->
 
 <div layout-align="center center">
     <md-card>
@@ -71,8 +71,11 @@
                 <input type="range" id="tauptSlider" ng-model="tauptSlider">
                 <br>
                 <span>(from controller) slider/cut value: {{ tauptSlider }}</span>
+
             </md-card-content>
     </div>
+
+    <md-button class="md-raised md-primary" ng-click="go('/report')">Write Report</md-button>
 </div>
 
 

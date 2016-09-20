@@ -1,5 +1,10 @@
 ppoutreach.controller('analysisController', ['$scope', '$location', function ($scope, $location) {
     //TODO: setup datacutter to append cut value to this object
+
+    $scope.go = function(path) {
+        $location.path(path);
+    };
+    
     //variables titles etc for ng-repeat's.
     $scope.datasets = {
         "hh4": {
@@ -188,7 +193,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 50, "mbb");
         $scope.histPlot("#drSlider", $scope.dr, ".drHist", 50, "dr");
         $scope.histPlot("#hptSlider", $scope.hpt, ".hptHist", 50, "hpt");
-        $scope.histPlot("#tauptSlider", $scope.taupt, ".tauptHist", 50, "taupt")
+        $scope.histPlot("#tauptSlider", $scope.taupt, ".tauptHist", 50, "taupt");
 
         //calling function to cut data given slider values:
         $scope.sliderCut("mbbSlider", "mbb", 0);

@@ -25,6 +25,7 @@
 		<script src="analysis.directive.js"></script>
 		<script src="main.controller.js"></script>
         <script src="selection.controller.js"></script>
+        <script src="report.controller.js"></script>
 
 		<!-- Angular Material Dependencies -->
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
@@ -44,13 +45,13 @@
 	</head>
 	<body layout-fill layout="column" ng-cloak ng-app="ppoutreach" ng-controller="mainController">
 
-
+        <!-- TODO: put toolbar in toolbar.html and ng-include -->
         <md-toolbar class="main-toolbar" ng-hide="$state.includes('Login')">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" aria-label="Settings" ng-click="openLeftMenu()">
                     <i class="material-icons">menu</i>
                 </md-button>
-                <h1><span>PPoutreach > {{ $state.current.name }} > {{ cookieVal }}</span></h1>
+                <h1><span>PPoutreach > {{ $state.current.name }}</span></h1>
                 <span flex></span>
                 <md-menu>
                     <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)" >
@@ -63,34 +64,11 @@
             </div>
         </md-toolbar>
 
-        <md-content flex layout="row">
-            <md-sidenav ng-hide="$state.includes('Login')" layout-fill layout="column" class="md-sidenav-left md-whiteframe-z2" md-disable-backdrop md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-                <md-toolbar class="md-tall">
-                    <span flex></span>
-                    <div layout="column" class="md-toolbar-tools-bottom inset">
-                        <user-avatar></user-avatar>
-                        <span></span>
-                        <div>Firstname Lastname</div>
-                        <div>email@domainname.com</div>
-                    </div>
-                </md-toolbar>
-                <md-list>
-                    <md-item ng-repeat="item in menu">
-                        <a>
-                            <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                                <div class="inset">
-                                    {{item.title}}
-                                </div>
-                            </md-item-content>
-                        </a>
-                    </md-item>
-                </md-list>
+        <md-content flex layout="row" ng-cloak>
+            <md-sidenav flex ng-cloak ng-include="'sidenav.html'" ng-hide="$state.includes('Login')" layout-fill layout="column" class="md-sidenav-left md-whiteframe-z2" md-disable-backdrop md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
             </md-sidenav>
-
             <ui-view flex></ui-view>
         </md-content>
-
-
 
     </body>
 </html>

@@ -1,0 +1,40 @@
+<div layout-padding layout="row">
+
+    <div flex="30">
+        Here you will write a scientific report, documenting your results and conclusions.
+
+        <p>Introduction: here you will write about xyz</p>
+
+        <p>Method: here you will write about xyz</p>
+
+        <p>Results: here you will write about xyz</p>
+
+        <p>Conclusions: xyz</p>
+
+        <md-button class="md-primary md-raised">Preview plots</md-button>
+    </div>
+
+    <div layout="column" flex>
+
+
+
+        <md-card ng-repeat="section in reportSections">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="headline"> {{ section.title }}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-input-container class="md-block">
+                <input type="text">
+            </md-input-container>
+
+        </md-card>
+
+        <md-button class="md-primary md-raised" ng-click="">Submit</md-button>
+    </div>
+
+
+
+
+
+</div>

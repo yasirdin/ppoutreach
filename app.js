@@ -35,6 +35,9 @@ ppoutreach.config(function($mdThemingProvider) {
         .accentPalette('orange')
         //.warnPalette('default')
         .backgroundPalette('grey');
+
+    $mdThemingProvider.theme('alt1')
+        .backgroundPalette('blue');
 });
 
 ppoutreach.config(['$urlRouterProvider', '$stateProvider' , function($urlRouterProvider, $stateProvider) {
@@ -64,6 +67,11 @@ ppoutreach.config(['$urlRouterProvider', '$stateProvider' , function($urlRouterP
             url: '/analysis',
             templateUrl: 'analysis.html',
             controller: 'analysisController'
+        })
+        .state('Report', {
+            url: '/report',
+            templateUrl: 'report.html',
+            controller: 'reportController'
         }
     )
 }]);
