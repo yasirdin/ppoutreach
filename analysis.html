@@ -9,6 +9,15 @@
         </md-card-title>
         <md-card-content>
             <span>Toggle different datasets using the switches below.</span>
+            <md-switch ng-model="ttbar3Switch" ng-change="onChange('data/ttbar3.json', ttbar3Switch)">
+                ttbar3
+            </md-switch>
+            <md-switch ng-model="hh4Switch" ng-change="onChange('data/hh4.json', hh4Switch)">
+                hh+4
+            </md-switch>
+            ttbar3 switch: {{ ttbar3Switch }}
+            <br>
+            hh+4 switch: {{ hh4Switch }}
         </md-card-content>
     </md-card>
 
@@ -22,7 +31,7 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                <div class="mbbHist"></div>
+                <div class="mbbHist varHist"></div>
                 <input type="range" id="mbbSlider" ng-model="mbbSlider">
                 <br>
                 <span>(from controller) slider/cut value: {{ mbbSlider }}</span>
@@ -37,7 +46,7 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                <div class="drHist"></div>
+                <div class="drHist varHist"></div>
                 <input type="range" id="drSlider" ng-model="drSlider">
                 <br>
                 <span>(from controller) slider/cut value: {{ drSlider }}</span>
@@ -52,7 +61,7 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                <div class="hptHist"></div>
+                <div class="hptHist varHist"></div>
                 <input type="range" id="hptSlider" ng-model="hptSlider">
                 <br>
                 <span>(from controller) slider/cut value: {{ hptSlider }}</span>
@@ -67,7 +76,7 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                <div class="tauptHist"></div>
+                <div class="tauptHist varHist"></div>
                 <input type="range" id="tauptSlider" ng-model="tauptSlider">
                 <br>
                 <span>(from controller) slider/cut value: {{ tauptSlider }}</span>
@@ -77,10 +86,6 @@
 
     <md-button class="md-raised md-primary" ng-click="go('/report')">Write Report</md-button>
 </div>
-
-
-
-
 
 <!-- test hist:
 <h1>pT test</h1>
