@@ -79,7 +79,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         */
 
         //setting slider limits
-        d3.select(sliderId)
+        d3.selectAll(sliderId)
             .attr("min", d3.min(data))
             .attr("max", d3.max(data))
             .attr("step", "0.001");
@@ -176,16 +176,30 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
     //function for watching sliders and applying multiple cuts:
     $scope.dataCuts = {};
 
-    $scope.sliderCut = function(sliderModel, varName, colNum) {
-        $scope.$watch(sliderModel, function(slider) {
-            if (!slider) { return; }
+    $scope.sliderCut = function(sliderModel, slider2Model, varName, colNum) {
+        $scope.$watchGroup([sliderModel, slider2Model], function(newValues) {
+            //slider1 and slider2 values:
+            var slider = newValues[0];
+            var slider2 = newValues[1];
+
+            //bypass error message when there when no slider:
+            if (!slider && !slider2) { return; }
 
             //appending slider/cut value to $scope stored object
-            $scope.dataCuts[varName] = slider;
+            //$scope.dataCuts[varName] = slider;
+            //$scope.dataCuts[varName][] = slider2;
+
+            //TODO: probably incorrect structure used here, fix:
+            $scope.dataCuts[varName] = [];
+            $scope.dataCuts[varName].lower = slider;
+            $scope.dataCuts[varName].upper = slider2;
+
+            console.log($scope.dataCuts);
 
             //function for filtering data:
             function cutCheck(entry) {
-                return entry[colNum] <= slider;
+                if (entry)
+                return entry[colNum] >= slider && entry[colNum] <=slider2
             }
 
             //filtering data:
@@ -242,10 +256,10 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             $scope.histPlot("#tauptSlider", $scope.taupt, ".tauptHist", 50, "taupt");
 
             //calling function to cut data given slider values:
-            $scope.sliderCut("mbbSlider", "mbb", 0);
-            $scope.sliderCut("drSlider", "dr", 1);
-            $scope.sliderCut("hptSlider", "hpt", 2);
-            $scope.sliderCut("tauptSlider", "tauput", 3);
+            $scope.sliderCut("mbbSlider", "mbbSlider2", "mbb", 0);
+            $scope.sliderCut("drSlider", "drSlider2", "dr", 1);
+            $scope.sliderCut("hptSlider", "hptSlider2", "hpt", 2);
+            $scope.sliderCut("tauptSlider", "tauptSlider2","tauput", 3);
 
             //watching mainData to dynamically adjust variable cut data:
             $scope.$watch('cutMainData', function (data) {
