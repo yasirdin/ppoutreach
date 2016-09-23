@@ -1,6 +1,15 @@
 ppoutreach.controller('analysisController', ['$scope', '$location', function ($scope, $location) {
     //TODO: setup datacutter to append cut value to this object
 
+    // test //
+
+    $scope.demo1 = {
+        min: 20,
+        max: 80
+    };
+
+    // end test //
+
     $scope.go = function(path) {
         $location.path(path);
     };
@@ -37,11 +46,9 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         }
     };
 
-    $scope.testing = {from:0, to:10};
-
     $scope.plotConstants = {
-        margin: {top: 10, right: 50, bottom: 30, left:50},
-        width: 1000 - 50 - 50,
+        margin: {top: 10, right: 10, bottom: 30, left: 10},
+        width: 1100 - 10 - 10,
         height: 500 - 10 - 30
     };
 
@@ -52,6 +59,25 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
     //function for plotting static variable histogram
     $scope.histPlot = function(sliderId, data, histClass, bincount, varName) {
 
+        /*
+        //TODO: programmatically add: plot, slider
+        var mdcard = d3.select(".main").append("md-card");
+
+        var mdcardTitle = mdcard.append("md-card-title")
+            .append("md-card-title-text")
+            .append("span").attr("class", "md-headline").text(varName);
+
+        var mdcardContent = mdcard.append("md-card-content");
+
+        var histDiv = mdcardContent.append("div").attr("class", histClass).attr("class", "varHist");
+        */
+                
+        /*
+        var newdiv = document.createElement("DIV");
+        newdiv.appendChild(document.createTextNode("some text"));
+        document.appendChild(newdiv);
+        */
+
         //setting slider limits
         d3.select(sliderId)
             .attr("min", d3.min(data))
@@ -61,8 +87,10 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         var c = $scope.plotConstants;
 
         var svg = d3.select(histClass).append("svg")
-            .attr("width", c.width + c.margin.left)
-            .attr("height", c.height + c.margin.top + c.margin.bottom);
+            .attr("width", c.width + c.margin.left + c.margin.right)
+            .attr("height", c.height + c.margin.top + c.margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + c.margin.left + "," + c.margin.top + ")");
 
         var axis = svg.append("g")
             .attr("transform", "translate(0," + c.height + ")");
@@ -116,7 +144,7 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
         var c = $scope.plotConstants;
         var scales = $scope.plotScales[varName];
 
-        var svg = d3.select(histClass).select("svg");
+        var svg = d3.select(histClass).select("svg").select("g");
 
         var bins = d3.histogram()
             .thresholds(scales.x.ticks(bincount))
@@ -179,76 +207,78 @@ ppoutreach.controller('analysisController', ['$scope', '$location', function ($s
             //remove plots when switch is turned off:
             if (switchModel == false) {
                 var hists = d3.selectAll(".varHist");
-
                 hists.remove("svg");
+
+                /*
+                var element = document.getElementsByClassName("varHist");
+                //removing child elements:
+                element.innerHTML = "";
+                */
             }
 
-            else {
-                //saving data to the scope
-                $scope.mainData = data;
 
-                //creating function to extract arrays for each variable, put on $scope so reusable elsewhere:
-                function varExtract(data, col) {
-                    if (data) {
-                        return data.map(function (value, index) {
-                            return value[col];
-                        });
-                    }
+            //saving data to the scope
+            $scope.mainData = data;
+
+            //creating function to extract arrays for each variable, put on $scope so reusable elsewhere:
+            function varExtract(data, col) {
+                if (data) {
+                    return data.map(function (value, index) {
+                        return value[col];
+                    });
                 }
-
-                //defining variable arrays:
-                $scope.mbb = varExtract(data, 0);
-                $scope.dr = varExtract(data, 1);
-                $scope.hpt = varExtract(data, 2);
-                $scope.taupt = varExtract(data, 3);
-
-                //plotting static histogram and slider:
-                $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 50, "mbb");
-                $scope.histPlot("#drSlider", $scope.dr, ".drHist", 50, "dr");
-                $scope.histPlot("#hptSlider", $scope.hpt, ".hptHist", 50, "hpt");
-                $scope.histPlot("#tauptSlider", $scope.taupt, ".tauptHist", 50, "taupt");
-
-                //calling function to cut data given slider values:
-                $scope.sliderCut("mbbSlider", "mbb", 0);
-                $scope.sliderCut("drSlider", "dr", 1);
-                $scope.sliderCut("hptSlider", "hpt", 2);
-                $scope.sliderCut("tauptSlider", "tauput", 3);
-
-                //watching mainData to dynamically adjust variable cut data:
-                $scope.$watch('cutMainData', function (data) {
-                    $scope.mbbCut = varExtract(data, 0);
-                    $scope.drCut = varExtract(data, 1);
-                    $scope.hptCut = varExtract(data, 2);
-                    $scope.tauptCut = varExtract(data, 3);
-                }, true);
-
-                //setting up $watch'ers to plot cutData
-                $scope.$watch('mbbCut', function (data) {
-                    if (data) {
-                        $scope.cutPlot(".mbbHist", data, 50, "mbb");
-                    }
-                });
-
-                $scope.$watch('drCut', function (data) {
-                    if (data) {
-                        $scope.cutPlot(".drHist", data, 50, "dr");
-                    }
-                });
-
-                $scope.$watch('hptCut', function (data) {
-                    if (data) {
-                        $scope.cutPlot(".hptHist", data, 50, "hpt");
-                    }
-                });
-
-                $scope.$watch('tauptCut', function (data) {
-                    if (data) {
-                        $scope.cutPlot(".tauptHist", data, 50, "taupt");
-                    }
-                });
-
             }
 
+            //defining variable arrays:
+            $scope.mbb = varExtract(data, 0);
+            $scope.dr = varExtract(data, 1);
+            $scope.hpt = varExtract(data, 2);
+            $scope.taupt = varExtract(data, 3);
+
+            //plotting static histogram and slider:
+            $scope.histPlot("#mbbSlider", $scope.mbb, ".mbbHist", 50, "mbb");
+            $scope.histPlot("#drSlider", $scope.dr, ".drHist", 50, "dr");
+            $scope.histPlot("#hptSlider", $scope.hpt, ".hptHist", 50, "hpt");
+            $scope.histPlot("#tauptSlider", $scope.taupt, ".tauptHist", 50, "taupt");
+
+            //calling function to cut data given slider values:
+            $scope.sliderCut("mbbSlider", "mbb", 0);
+            $scope.sliderCut("drSlider", "dr", 1);
+            $scope.sliderCut("hptSlider", "hpt", 2);
+            $scope.sliderCut("tauptSlider", "tauput", 3);
+
+            //watching mainData to dynamically adjust variable cut data:
+            $scope.$watch('cutMainData', function (data) {
+                $scope.mbbCut = varExtract(data, 0);
+                $scope.drCut = varExtract(data, 1);
+                $scope.hptCut = varExtract(data, 2);
+                $scope.tauptCut = varExtract(data, 3);
+            }, true);
+
+            //setting up $watch'ers to plot cutData
+            $scope.$watch('mbbCut', function (data) {
+                if (data) {
+                    $scope.cutPlot(".mbbHist", data, 50, "mbb");
+                }
+            });
+
+            $scope.$watch('drCut', function (data) {
+                if (data) {
+                    $scope.cutPlot(".drHist", data, 50, "dr");
+                }
+            });
+
+            $scope.$watch('hptCut', function (data) {
+                if (data) {
+                    $scope.cutPlot(".hptHist", data, 50, "hpt");
+                }
+            });
+
+            $scope.$watch('tauptCut', function (data) {
+                if (data) {
+                    $scope.cutPlot(".tauptHist", data, 50, "taupt");
+                }
+            });
         });
     };
 }]);

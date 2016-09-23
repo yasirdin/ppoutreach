@@ -10,11 +10,11 @@
     </div>
 </md-toolbar>
 <md-list>
-    <md-subheader class="sidenav md-no-sticky"><h2>Progress</h2></md-subheader>
+    <div class="inset sidenavSubheader"><h3>Progress</h3></div>
     <md-item ng-repeat="item in menu">
         <a>
             <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                <div class="inset">
+                <div class="inset sidenavItem" flex>
                     {{item.title}}
                 </div>
             </md-item-content>

@@ -1,6 +1,6 @@
 <!-- TODO: ng-repeat the plots and filter according to dataset and variables selection defined by the user -->
 
-<div layout-align="center center">
+<div layout-align="center center" class="main">
     <md-card>
         <md-card-title>
             <md-card-title-text>
@@ -15,9 +15,6 @@
             <md-switch ng-model="hh4Switch" ng-change="onChange('data/hh4.json', hh4Switch)">
                 hh+4
             </md-switch>
-            ttbar3 switch: {{ ttbar3Switch }}
-            <br>
-            hh+4 switch: {{ hh4Switch }}
         </md-card-content>
     </md-card>
 
@@ -83,7 +80,6 @@
 
             </md-card-content>
     </div>
-
     <md-button class="md-raised md-primary" ng-click="go('/report')">Write Report</md-button>
 </div>
 

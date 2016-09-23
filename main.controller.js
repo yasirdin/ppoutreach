@@ -1,4 +1,4 @@
-ppoutreach.controller("mainController", ['$scope', '$mdSidenav', '$location', '$rootScope', '$cookies', function($scope, $mdSidenav, $location, $rootScope, $cookies) {
+ppoutreach.controller("mainController", ['$scope', '$mdSidenav', '$location', '$rootScope', '$cookies', '$state', function($scope, $mdSidenav, $location, $rootScope, $cookies, $state) {
 
     //sidenav:
     $scope.openLeftMenu = function() {
@@ -19,7 +19,7 @@ ppoutreach.controller("mainController", ['$scope', '$mdSidenav', '$location', '$
         $location.path('/');
     };
     
-    //sidenav contents: (TODO: use state names from ui.router instead?)
+    //sidenav contents:
     $scope.menu = [
         {title: 'Subject selection'},
         {title: 'Introduction'},
@@ -27,4 +27,6 @@ ppoutreach.controller("mainController", ['$scope', '$mdSidenav', '$location', '$
         {title: 'Analysis exercise'},
         {title: 'Report Writing'}
     ];
+
+    //getting state parameter
 }]);

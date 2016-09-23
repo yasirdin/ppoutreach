@@ -1,4 +1,4 @@
-var ppoutreach = angular.module('ppoutreach', ['ui.router', 'ngRangeSlider', 'ngMaterial', 'ngMdIcons', 'ngCookies']);
+var ppoutreach = angular.module('ppoutreach', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngCookies', 'rzModule', 'ui-rangeSlider']);
 
 //cookies service, putting cookie functions in service makes it accessible to all controllers:
 ppoutreach.factory('userPersistenceService', ['$cookies', function($cookies) {
