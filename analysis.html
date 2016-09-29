@@ -1,6 +1,8 @@
 <!-- TODO: ng-repeat the plots and filter according to dataset and variables selection defined by the user -->
 
-<div layout-align="center center" class="main">
+<div layout-align="center center" class="main"
+
+    <!-- dataset selector -->
     <md-card>
         <md-card-title>
             <md-card-title-text>
@@ -18,8 +20,8 @@
         </md-card-content>
     </md-card>
 
-    <!-- vairable histograms -->
-    <div layout="row" layout-wrap>
+    <div layout="row" layout-wrap ng-model="hideCards" ng-hide="hideCards">
+
         <md-card>
             <md-card-title>
                 <md-card-title-text>
@@ -29,7 +31,10 @@
             </md-card-title>
             <md-card-content>
                 <div class="mbbHist varHist"></div>
+                <h3>Lower cut:</h3>
                 <input type="range" id="mbbSlider" ng-model="mbbSlider">
+                <br>
+                <h3>Upper cut:</h3>
                 <input type="range" id="mbbSlider" ng-model="mbbSlider2">
                 <br>
                 <span>(from controller) slider/cut value: {{ mbbSlider }}</span>
@@ -47,7 +52,10 @@
             </md-card-title>
             <md-card-content>
                 <div class="drHist varHist"></div>
+                <h3>Lower cut:</h3>
                 <input type="range" id="drSlider" ng-model="drSlider">
+                <br>
+                <h3>Upper cut:</h3>
                 <input type="range" id="drSlider" ng-model="drSlider2">
                 <br>
                 <span>(from controller) slider/cut value: {{ drSlider }}</span>
@@ -65,7 +73,10 @@
             </md-card-title>
             <md-card-content>
                 <div class="hptHist varHist"></div>
+                <h3>Lower cut:</h3>
                 <input type="range" id="hptSlider" ng-model="hptSlider">
+                <br>
+                <h3>Upper cut:</h3>
                 <input type="range" id="hptSlider" ng-model="hptSlider2">
                 <br>
                 <span>(from controller) slider/cut value: {{ hptSlider }}</span>
@@ -83,7 +94,10 @@
             </md-card-title>
             <md-card-content>
                 <div class="tauptHist varHist"></div>
+                <h3>Lower cut:</h3>
                 <input type="range" id="tauptSlider" ng-model="tauptSlider">
+                <br>
+                <h3>Upper cut:</h3>
                 <input type="range" id="tauptSlider" ng-model="tauptSlider2">
                 <br>
                 <span>(from controller) slider/cut value: {{ tauptSlider }}</span>
@@ -93,6 +107,7 @@
             </md-card-content>
     </div>
     <md-button class="md-raised md-primary" ng-click="go('/report')">Write Report</md-button>
+    <md-button class="md-raised md-primary" ng-click="go('/analysistest')">Analysis test page</md-button>
 </div>
 
 <!-- test hist:

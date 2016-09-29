@@ -1,0 +1,19 @@
+<div layout-align="center center" class="main">
+
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">mbb signal/background</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+            <div class="mbbHistSigBg"></div>
+            <br>
+            <input type="range" id="mbbSlider" ng-model="mbbSlider">
+            <br>
+            <div class="mbbSigOverBg"></div>
+        </md-card-content>
+    </md-card>
+
+    <md-button class="md-raised md-primary" ng-click="go('/report')">Write Report</md-button>
+</div>

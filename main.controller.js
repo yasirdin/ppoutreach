@@ -27,6 +27,4 @@ ppoutreach.controller("mainController", ['$scope', '$mdSidenav', '$location', '$
         {title: 'Analysis exercise'},
         {title: 'Report Writing'}
     ];
-
-    //getting state parameter
 }]);
