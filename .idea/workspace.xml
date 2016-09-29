@@ -4,7 +4,6 @@
     <list default="true" id="5b69412a-d133-4600-bb2e-d05b01908a3f" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysistest.controller.js" afterPath="$PROJECT_DIR$/analysistest.controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysistest.html" afterPath="$PROJECT_DIR$/analysistest.html" />
     </list>
     <ignored path="ppoutreach_yasir.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,8 +57,8 @@
       <file leaf-file-name="analysis.controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysis.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="127" column="53" selection-start-line="127" selection-start-column="47" selection-end-line="127" selection-end-column="53" />
+            <state relative-caret-position="-920">
+              <caret line="159" column="6" selection-start-line="159" selection-start-column="6" selection-end-line="159" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -78,8 +77,8 @@
       <file leaf-file-name="analysistest.controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analysistest.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+            <state relative-caret-position="821">
+              <caret line="282" column="0" selection-start-line="282" selection-start-column="0" selection-end-line="282" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -370,7 +369,7 @@
       <workItem from="1473675927008" duration="47986000" />
       <workItem from="1474278630319" duration="37020000" />
       <workItem from="1474541174739" duration="65026000" />
-      <workItem from="1475152774535" duration="17704000" />
+      <workItem from="1475152774535" duration="22535000" />
     </task>
     <task id="LOCAL-00001" summary="fixed issue with plotting re-binned cut data">
       <created>1471355032790</created>
@@ -540,11 +539,18 @@
       <option name="project" value="LOCAL" />
       <updated>1475170047672</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="sig over bkg plots y axis scaling fixed">
+      <created>1475182711554</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1475182711554</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="788104000" />
+    <option name="totallyTimeSpent" value="792935000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -590,7 +596,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fixed issue with plotting re-binned cut data" />
     <MESSAGE value="changed router from ngRoute to ui.router" />
     <MESSAGE value="navbar and footer addition plus other misc layout changes" />
     <MESSAGE value="before implementing real data&#10;" />
@@ -615,7 +620,8 @@
     <MESSAGE value="fixed margins for analysis histograms" />
     <MESSAGE value="double sided cuts implemented" />
     <MESSAGE value="sig over bkg plots working in analysistest.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="sig over bkg plots working in analysistest.html" />
+    <MESSAGE value="sig over bkg plots y axis scaling fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="sig over bkg plots y axis scaling fixed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -911,14 +917,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="563">
-          <caret line="72" column="25" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mystylesheet.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
@@ -935,6 +933,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="563">
+          <caret line="72" column="25" selection-start-line="72" selection-start-column="25" selection-end-line="72" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/analysistest.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
@@ -945,16 +951,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/analysis.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="127" column="53" selection-start-line="127" selection-start-column="47" selection-end-line="127" selection-end-column="53" />
+        <state relative-caret-position="-920">
+          <caret line="159" column="6" selection-start-line="159" selection-start-column="6" selection-end-line="159" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/analysistest.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        <state relative-caret-position="821">
+          <caret line="282" column="0" selection-start-line="282" selection-start-column="0" selection-end-line="282" selection-end-column="0" />
           <folding />
         </state>
       </provider>

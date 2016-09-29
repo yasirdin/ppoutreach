@@ -7,6 +7,8 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
         height: 500 - 10 - 30
     };
 
+    $scope.plotScales = {};
+
     $scope.histPlot = function(sigData, bgData, histClass, bincount, varName) {
 
         var c = $scope.plotConstants;
@@ -70,11 +72,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
             var yDomainMax = bgBinMax;
         }
 
-        var sigY = d3.scaleLinear()
-            .domain([0, yDomainMax])
-            .range([c.height, 0]);
-
-        var bgY = d3.scaleLinear()
+        var y = d3.scaleLinear()
             .domain([0, yDomainMax])
             .range([c.height, 0]);
 
@@ -90,7 +88,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
         gSigBar.attr("class", "sigBar")
             .attr("stroke", "white")
             .attr("transform", function (d) {
-                return "translate(" + x(d.x0) + "," + sigY(d.length) + ")";
+                return "translate(" + x(d.x0) + "," + y(d.length) + ")";
             })
             .append("rect")
             .attr("fill", "steelblue")
@@ -98,7 +96,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
                 return x(d.x1) - x(d.x0)
             })
             .attr("height", function (d) {
-                return c.height - sigY(d.length)
+                return c.height - y(d.length)
             });
 
         //data bind:
@@ -115,14 +113,14 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
             .attr("opacity", 0.3)
             .attr("fill", "red")
             .attr("transform", function (d) {
-                return "translate(" + x(d.x0) + "," + bgY(d.length) + ")";
+                return "translate(" + x(d.x0) + "," + y(d.length) + ")";
             })
             .append("rect")
             .attr("width", function (d) {
                 return x(d.x1) - x(d.x0)
             })
             .attr("height", function (d) {
-                return c.height - bgY(d.length)
+                return c.height - y(d.length)
             });
 
         //checking if the dataset that is being plotted is signal or background:
@@ -130,8 +128,10 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
         //update axis:
         axis.call(d3.axisBottom(x));
 
-        console.log("signal bins", sigBins);
-        console.log(bgBins);
+        //savings scales to $scope object for cutPlot:
+        $scope.plotScales[varName] = {};
+        $scope.plotScales[varName].x = x;
+        $scope.plotScales[varName].y = y;
     };
     
     // COMBINING SIGNAL, BACKGROUND DATA:
@@ -174,6 +174,39 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
 
     //CUT DATA PLOTTER:
 
+    $scope.cutPlot = function(data, histClass, bincount, varName) {
+        //calling plot constants:
+        var c = $scope.plotConstants;
+        var scales = $scope.plotScales[varName];
+
+        var svg = d3.select(histClass).select("svg").select("g");
+
+        var bins = d3.histogram()
+            .thresholds(scales.x.ticks(bincount))
+            (data);
+
+        svg.selectAll(".cutbar").remove();
+
+        //data bind
+        var bar = svg.selectAll(".cutbar")
+            .data(bins);
+
+        var gbar = bar.enter().append("g")
+            .attr("class", "cutbar")
+            .attr("transform", function (d) {
+                return "translate(" + scales.x(d.x0) + "," + scales.y(d.length) + ")";
+            });
+
+        gbar.append("rect")
+            .style("opacity", 0.5)
+            .attr("fill", "green")
+            .attr("width", function (d) {
+                return scales.x(d.x1) - scales.x(d.x0)
+            })
+            .attr("height", function (d) {
+                return c.height - scales.y(d.length);
+            });
+    };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //LOADING IN DATA AND CALLING FUNCTIONS:
@@ -219,8 +252,36 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
             
             $scope.$watch("mbbCut", function(data) {
                 if (data) {
-                    //$scope.cutPlot("")
+                    $scope.cutPlot(data, ".mbbHistSigBg", 60, "mbb");
                 }
+            });
+
+            //TODO: watching the whole of cutMainData may have some performance reprecussions, check this:
+            //can merge this with the $watch(cutMainData above here)
+            //SIGNAL/BACKGROUND count
+            $scope.$watch('cutMainData', function(data) {
+                //extracting final signal background label column
+                var sigBgColumn = varExtract(data, 4);
+
+                //counting signal and backgrounds:
+                var sigCount = 0;
+                for (i = 0; i < sigBgColumn.length; i++) {
+                    if (sigBgColumn[i] == "S") {
+                        sigCount++;
+                    }
+                }
+
+                var bgCount = 0;
+                for (i = 0; i < sigBgColumn.length; i++) {
+                    if(sigBgColumn[i] == "B") {
+                        bgCount++;
+                    }
+                }
+
+                //calculating signal/background ratio:
+                $scope.sigBgRatio = sigCount / data.length;
+
+                console.log($scope.sigBgRatio);
             })
         });
     });
