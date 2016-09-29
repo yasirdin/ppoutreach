@@ -28,7 +28,8 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
         //bg range:
         var bgRange = d3.max(bgData) - d3.min(bgData);
 
-        //assigning the widest ranging dataset to var data for setting scales.
+        //X-SCALE:
+        //assigning the widest ranging dataset to var data for setting xScale:
         if (sigRange > bgRange) {
             var scaleData = sigData;
         }
@@ -42,18 +43,39 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
             .domain([d3.min(scaleData), d3.max(scaleData)])
             .rangeRound([0, c.width]);
 
-        //cutting input data into nested array of bins
+        //Y-SCALE:
+        //binning first to find bin with highest number of entries:
 
-        //TODO: put plotting inside of a function:
-
-        //PLOTTING SIGNAL:
         var sigBins = d3.histogram()
             .thresholds(x.ticks(bincount))
             (sigData);
 
+        var bgBins = d3.histogram()
+            .thresholds(x.ticks(bincount))
+            (bgData);
+
+        var sigBinMax = d3.max(sigBins, function(d) {
+            return d.length;
+        });
+
+        var bgBinMax = d3.max(bgBins, function(d) {
+            return d.length;
+        });
+
+        if (sigBinMax > bgBinMax) {
+            var yDomainMax = sigBinMax;
+        }
+
+        if (bgBinMax > sigBinMax) {
+            var yDomainMax = bgBinMax;
+        }
+
         var sigY = d3.scaleLinear()
-            .domain([0, d3.max(sigBins, function (d) {
-                return d.length; })])
+            .domain([0, yDomainMax])
+            .range([c.height, 0]);
+
+        var bgY = d3.scaleLinear()
+            .domain([0, yDomainMax])
             .range([c.height, 0]);
 
         //data bind:
@@ -78,16 +100,6 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
             .attr("height", function (d) {
                 return c.height - sigY(d.length)
             });
-
-        //plotting BACKGROUND data:
-        var bgBins = d3.histogram()
-            .thresholds(x.ticks(bincount))
-            (bgData);
-
-        var bgY = d3.scaleLinear()
-            .domain([0, d3.max(bgBins, function (d) {
-                return d.length;})])
-            .range([c.height, 0]);
 
         //data bind:
         var bgBar = svg.selectAll(".bgBar")
@@ -118,11 +130,8 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
         //update axis:
         axis.call(d3.axisBottom(x));
 
-        //TODO: save plot scales to $scope for cutPlot to access
-        //saving the variable dependent x-y scale definitions on the $scope
-        //$scope.plotScales[varName] = {};
-        //$scope.plotScales[varName].x = x;
-        //$scope.plotScales[varName].y = y;
+        console.log("signal bins", sigBins);
+        console.log(bgBins);
     };
     
     // COMBINING SIGNAL, BACKGROUND DATA:
@@ -142,17 +151,33 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
 
     };
 
-
-
     // SLIDER DATA CUTTER:
 
-    $scope.sliderCut = function(sigData, bgData, sliderModel, varName, colNum) {
-        
+    $scope.sliderCut = function(sliderId, sliderModel, data, columnNumber) {
+        //set slider limits using $scope.mainData (combined signal and background data):
+        d3.selectAll(sliderId)
+            .attr("min", d3.min(data))
+            .attr("max", d3.max(data))
+            .attr("step", "1.0");
+
+        //data cutting function:
+        $scope.$watch(sliderModel, function(sliderValue) {
+            function cutCheck(entry) {
+                if (entry)
+                    return entry[columnNumber] <= sliderValue;
+            }
+            
+            //filtering data -- applies cuts across all variables:
+            $scope.cutMainData = $scope.mainData.filter(cutCheck);
+        });
     };
 
+    //CUT DATA PLOTTER:
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //LOADING IN DATA AND CALLING FUNCTIONS:
+
     //signal:
     d3.json("data/hh4.json", function(error, sigData) {
         if (error) { throw error; }
@@ -171,9 +196,9 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
             }
 
             //combining both datasets and labelling signal and background events
+            //combined data saved as $scope.mainData
             $scope.combineData(sigData, bgData);
-
-
+            
             //signal variables:
             $scope.mbbSig = varExtract(sigData, 0);
             $scope.drSig = varExtract(sigData, 1);
@@ -184,10 +209,19 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
 
             //plotting static signal over background plot:
             $scope.histPlot($scope.mbbSig, $scope.mbbBg, ".mbbHistSigBg", 60, "mbb");
-
-
             
+            //setting slider limits and cutting function:
+            $scope.sliderCut("#mbbSlider", "mbbSlider", varExtract($scope.mainData, 0), 0);
+
+            $scope.$watch('cutMainData', function (data) {
+                $scope.mbbCut = varExtract(data, 0);
+            }, true);
             
+            $scope.$watch("mbbCut", function(data) {
+                if (data) {
+                    //$scope.cutPlot("")
+                }
+            })
         });
     });
 
