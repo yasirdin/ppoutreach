@@ -7,12 +7,6 @@ ppoutreach.controller("mainController", ['$scope', '$mdSidenav', '$location', '$
 
     //login screen layout fix:
     $scope.location = $location;
-
-    /* closing:
-    $scope.openLeftMenu = function() {
-        $mdSidenav('left').close();
-    };
-    */
     
     //logout button redirects to home page
     $scope.logout = function() {

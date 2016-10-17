@@ -2,19 +2,49 @@
 
     <md-card>
         <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline">mbb signal/background</span>
-            </md-card-title-text>
+            <h1>Introduction</h1>
         </md-card-title>
         <md-card-content>
-            <div class="mbbHistSigBg"></div>
-            <br>
-            <input type="range" id="mbbSlider" ng-model="mbbSlider">
-            <br>
-            <text>Slider cut value: {{ mbbSlider }}</text>
-            <div class="mbbSigOverBg"></div>
+            <div>
+                This is the analysis exercise. Here you will explore data from a real proton-proton collision to ultimately find
+                signal decays hidden amongst a large background continuum. Starting with mbb, work through each variable, apply cuts on
+                the data for each variable to maximise the purity and significance of your data sample. Before finalising your cut selection
+                you are encouraged to experiment with a range of cut values to see how the purity and significance vary as a result.
+                <br>
+                <br>
+                The data in this exercise is simulated data, you will use this to define a set of cuts. At the end you will find out how
+                your cuts perform on REAL data.
+            </div>
         </md-card-content>
     </md-card>
+
+    <md-tabs md-stretch-tabs="always" md-dynamic-height md-border-bottom>
+        <!-- mbb tab -->
+        <md-tab label="mbb">
+            <div ng-include="'analysis_tabs/mbb.html'"></div>
+        </md-tab>
+
+        <md-tab label="dr">
+            <div ng-include="''"></div>
+        </md-tab>
+
+        <md-tab label="hpt">
+            <div ng-include="''"></div>
+        </md-tab>
+
+        <md-tab label="taupt">
+            <div ng-include="''"></div>
+        </md-tab>
+
+        <!-- hpt tab -->
+        <md-tab label="hpt">
+            <md-content class="md-padding">
+                <h1 class="md-display-2">Apply cuts</h1>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+
+
 
     <md-button class="md-raised md-primary" ng-click="go('/report')">Write Report</md-button>
 </div>

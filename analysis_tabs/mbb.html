@@ -1,0 +1,59 @@
+<md-content class="md-padding">
+
+    <h1 class="md-display-2">Apply cuts</h1>
+
+    <div layout="row" layout-wrap ng-model="hideCards" ng-hide="hideCards">
+
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">mbb signal/background</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <div class="mbbHistSigBg"></div>
+                <br>
+                <input type="range" id="mbbSlider" ng-model="mbbSlider">
+                <br>
+                <text>Slider cut value: {{ mbbSlider }}</text>
+                <br>
+                <text> Signal efficiency: {{ sigEfficiency }} </text>
+                <div class="mbbSigOverBg"></div>
+                <md-button class="md-raised md-primary" ng-click="purityPlotPoint('$scope.currentDatapoint'); significancePlotPoint('$scope.currentSignificanceDatapoint')">Check purity and significance</md-button>
+                <md-button class="md-raised md-warn">Finalise cut</md-button>
+            </md-card-content>
+        </md-card>
+
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">mbb signal purity plot</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <div class="mbbPurityScatter"></div>
+            </md-card-content>
+        </md-card>
+
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Significance</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <div class="mbbSignificanceScatter"></div>
+            </md-card-content>
+        </md-card>
+
+        <md-card>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">Current Purity and Significance</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content></md-card-content>
+        </md-card>
+    </div>
+
+</md-content>

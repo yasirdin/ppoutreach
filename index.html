@@ -49,31 +49,35 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
 
 	</head>
-	<body layout-fill layout="column" ng-cloak ng-app="ppoutreach" ng-controller="mainController">
+	<body layout-fill layout="row" ng-cloak ng-app="ppoutreach" ng-controller="mainController">
+
+        <md-sidenav flex ng-include="'sidenav.html'" ng-hide="$state.includes('Login')" layout-fill layout="column"
+        class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+        </md-sidenav>
 
         <!-- TODO: put toolbar in toolbar.html and ng-include -->
-        <md-toolbar class="main-toolbar" ng-hide="$state.includes('Login')">
-            <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Settings" ng-click="openLeftMenu()">
-                    <i class="material-icons">menu</i>
-                </md-button>
-                <h1><span>PPoutreach > {{ $state.current.name }}</span></h1>
-                <span flex></span>
-                <md-menu>
-                    <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)" >
-                        <i class="material-icons">more_vert</i>
+        <div layout="column">
+            <md-toolbar class="main-toolbar" ng-hide="$state.includes('Login')">
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Settings" ng-click="openLeftMenu()">
+                        <i class="material-icons">menu</i>
                     </md-button>
-                    <md-menu-content>
-                        <md-menu-item><md-button ng-click="logout()">Logout</md-button></md-menu-item>
-                    </md-menu-content>
-                </md-menu>
-            </div>
-        </md-toolbar>
+                    <h1><span>PPoutreach > {{ $state.current.name }}</span></h1>
+                    <span flex></span>
+                    <md-menu>
+                        <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)" >
+                            <i class="material-icons">more_vert</i>
+                        </md-button>
+                        <md-menu-content>
+                            <md-menu-item><md-button ng-click="logout()">Logout</md-button></md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+            </md-toolbar>
 
-        <md-content flex layout="row" ng-cloak>
-            <md-sidenav flex ng-cloak ng-include="'sidenav.html'" ng-hide="$state.includes('Login')" layout-fill layout="column" class="md-sidenav-left md-whiteframe-z2" md-disable-backdrop md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-            </md-sidenav>
-            <ui-view flex></ui-view>
-        </md-content>
+            <md-content flex layout="row" ng-cloak layout-fill>
+                <ui-view flex></ui-view>
+            </md-content>
+        </div>
     </body>
 </html>
