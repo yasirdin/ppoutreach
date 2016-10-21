@@ -1,9 +1,19 @@
-ppoutreach.controller("analysisTestController", ['$scope', '$location', function($scope, $location) {
+ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDialog', function($scope, $location, $mdDialog) {
+
+    //dialogue for finalising cut selection:
+    $scope.showDialog = function(ev) {
+        $mdDialog.show(
+            $mdDialog.alert()
+                .textContent('Are you sure you want to finalise this cut selection?')
+                .ok('Yes!')
+        )
+    };
+
 
     $scope.plotConstants = {
-        margin: {top: 10, right: 40, bottom: 30, left: 30},
-        width: 1100 - 10 - 10 - 40,
-        height: 500 - 10 - 30 - 40
+        margin: {top: 10, right: 40, bottom: 30, left: 40},
+        width: 1100 - 40 - 40,
+        height: 500 - 10 - 30
     };
 
     $scope.plotScales = {};
@@ -74,6 +84,22 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
         var y = d3.scaleLinear()
             .domain([0, yDomainMax])
             .range([c.height, 0]);
+
+        var brush = d3.brushX()
+            .extent([[0, 0], [c.width, c.height]]);
+
+        svg.call(brush);
+
+        /*
+        //d3 brush test:
+        $scope.brush = svg.append("g")
+            .attr("class", "brush")
+            .call(d3.brushX());
+        */
+
+        //.extent([0, 0], [c.width, c.height]);
+        ////
+
 
         //data bind:
         var sigBar = svg.selectAll(".sigBar")
@@ -492,7 +518,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', function
 
                     binding.enter().append("svg:circle")
                         .attr("r", 3)
-                        .attr("cx", x(d[0][1]))
+                        .attr("cx", x(d[0][0]))
                         .attr("cy", y(d[0][1]));
 
                 };

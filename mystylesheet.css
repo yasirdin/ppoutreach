@@ -245,3 +245,7 @@ input[type=range] {
 .md-sidenav-left.md-closed-remove {
     transition: 0.2s ease-in all;
 }
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none;
+}
