@@ -65,13 +65,18 @@ ppoutreach.config(['$urlRouterProvider', '$stateProvider' , function($urlRouterP
         })
         .state('Analysis', {
             url: '/analysis',
-            templateUrl: 'analysis.html',
-            controller: 'analysisController'
+            templateUrl: 'analysistest.html',
+            controller: 'analysisTestController'
         })
         .state('Analysistest', {
             url: '/analysistest',
-            templateUrl: 'analysistest.html',
-            controller: 'analysisTestController'
+            templateUrl: 'analysis.html',
+            controller: 'analysisController'
+        })
+        .state('Analysistwo', {
+            url: '/analysistwo',
+            templateUrl: 'analysistwo.html',
+            controller: 'analysisTwoController'
         })
         .state('Report', {
             url: '/report',

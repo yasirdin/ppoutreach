@@ -33,14 +33,8 @@
                         <md-card-content>
                             <div class="mbbHistSigBg"></div>
                             <br>
-                            <input type="range" id="mbbSlider" ng-model="mbbSlider">
-                            <br>
-                            <text>Slider cut value: {{ mbbSlider }}</text>
-                            <br>
                             <text> Signal efficiency: {{ sigEfficiency }} </text>
                             <div class="mbbSigOverBg"></div>
-                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('$scope.currentDatapoint'); significancePlotPoint('$scope.currentSignificanceDatapoint')">Check purity and significance</md-button>
-                            <md-button class="md-raised md-warn" ng-click="showDialog($event)">Finalise cut selection</md-button>
                         </md-card-content>
                     </md-card>
 
@@ -67,33 +61,156 @@
                     </md-card>
 
                     <md-card>
+                        <div>
+                            insert something which watches the cut value and prints the current significance and purity
+                        </div>
+                        <div layout="column">
+                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('$scope.currentDatapoint')">Check Purity</md-button>
+                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('$scope.currentSignificanceDatapoint')">Check Significance</md-button>
+                        </div>
+                        <md-button  class="md-raised md-warn" ng-click="showDialog($event)">Finalise cut selection</md-button>
+
+                        <h1>Current Significance: {{ currentSignificanceDatapoint }}</h1>
+                        <h1>Current Purity: {{ currentPurityDatapoint }}</h1>
+                    </md-card>
+
+                </div>
+            </md-content>
+        </md-tab>
+
+        <!-- DR TAB -->
+        <md-tab label="dr">
+            <md-content class="md-padding">
+                <div layout="row" layout-wrap ng-model="hideCards" ng-hide="hideCards">
+
+                    <md-card>
                         <md-card-title>
                             <md-card-title-text>
-                                <span class="md-headline">Current Purity and Significance</span>
+                                <span class="md-headline">dr signal/background</span>
                             </md-card-title-text>
                         </md-card-title>
-                        <md-card-content></md-card-content>
+                        <md-card-content>
+                            <div class="drHistSigBg mbb"></div>
+                            <br>
+                            <text> Signal efficiency: {{ sigEfficiency }} </text>
+                            <div class="mbbSigOverBg"></div>
+                        </md-card-content>
+                    </md-card>
+
+                    <md-card>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">mbb signal purity plot</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content layout-align="center center">
+                            <div class="mbbPurityScatter"></div>
+                        </md-card-content>
+                    </md-card>
+
+                    <md-card>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">Significance</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                            <div class="mbbSignificanceScatter"></div>
+                        </md-card-content>
                     </md-card>
                 </div>
             </md-content>
         </md-tab>
 
-        <!-- dr tab -->
-        <md-tab label="dr">
-            <div ></div>
-        </md-tab>
-
-        <!-- hpt tab -->
+        <!-- HPT TAB -->
         <md-tab label="hpt">
-            <div ng-include="''"></div>
+            <md-content class="md-padding">
+                <div layout="row" layout-wrap ng-model="hideCards" ng-hide="hideCards">
+
+                    <md-card>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">hpt signal/background</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                            <div class="hptHistSigBg hpt"></div>
+                            <br>
+                            <text> Signal efficiency: {{ sigEfficiency }} </text>
+                            <div class="hptSigOverBg"></div>
+                        </md-card-content>
+                    </md-card>
+
+                    <md-card>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">mbb signal purity plot</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content layout-align="center center">
+                            <div class="mbbPurityScatter"></div>
+                        </md-card-content>
+                    </md-card>
+
+                    <md-card>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">Significance</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                            <div class="mbbSignificanceScatter"></div>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </md-content>
         </md-tab>
 
-        <!-- taupt tab -->
+        <!-- TAUPT TAB -->
         <md-tab label="taupt">
-            <div ng-include="''"></div>
+            <md-content class="md-padding">
+                <div layout="row" layout-wrap ng-model="hideCards" ng-hide="hideCards">
+
+                    <md-card>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">hpt signal/background</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                            <div class="tauptHistSigBg taupt"></div>
+                            <br>
+                            <text> Signal efficiency: {{ sigEfficiency }} </text>
+                        </md-card-content>
+                    </md-card>
+
+                    <md-card>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">mbb signal purity plot</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content layout-align="center center">
+                            <div class="mbbPurityScatter"></div>
+                        </md-card-content>
+                    </md-card>
+
+                    <md-card>
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">Significance</span>
+                            </md-card-title-text>
+                        </md-card-title>
+                        <md-card-content>
+                            <div class="mbbSignificanceScatter"></div>
+                        </md-card-content>
+                    </md-card>
+                </div>
+            </md-content>
         </md-tab>
 
     </md-tabs>
 
     <md-button class="md-raised md-primary" ng-click="go('/report')">Write Report</md-button>
+    <md-button class="md-raised md-primary" ng-click="go('/analysistwo')">Sensitivity Exercise</md-button>
 </div>

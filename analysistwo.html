@@ -1,0 +1,23 @@
+<div layout-align="center center" class="main" ng-cloak>
+
+    <div layout="row">
+        <md-card>
+            <md-card-title>
+                <h1>Sensitivity Exercise</h1>
+            </md-card-title>
+            <md-card-content layout-align="center center">
+                <div class="mbbSensitivityPlot"></div>
+                <br>
+                <h1>Number of events:</h1>
+                <input type="range" ng-model="mbbSlider" min="0" max="1" value="0" step="0.025">
+                <br>
+                <md-button class="md-raised md-warn" ng-click="">Finalise Selection</md-button>
+            </md-card-content>
+        </md-card>
+    </div>
+
+    <md-button class="md-raised md-primary" ng-click="go('/report')">Write Report</md-button>
+
+
+
+</div>

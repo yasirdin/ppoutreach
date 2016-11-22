@@ -7,8 +7,6 @@ ppoutreach.controller('analysisController', ['$scope', '$location', '$timeout', 
     //$scope.dataLoader("hh4", "data/hh4.json", "signal");
     //$scope.dataLoader("ttbar3", "data/ttbar3.json", "background");
 
-   
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //activating ng-hide when page loads:
     $scope.hideCards = true;

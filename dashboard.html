@@ -1,16 +1,47 @@
 <div layout-padding>
     <h1>Data Dashboard</h1>
 
-    <md-button class="md-warn bgbutton md-raised">
-        Background 1
-    </md-button>
+    <md-card>
+        <md-card-title>
+             <md-card-title-text>
+                 <h1>Introduction</h1>
+             </md-card-title-text>
+        </md-card-title>
 
-    <md-button class="md-warn bgbutton md-raised">
-        Background 2
-    </md-button>
+        <md-card-content>
+            The data is divided into signal and background samples.
+            <br>
+            <br>
+            Each data sample contains measurements for 4 different variables -- mbb, dr, hpt, taupt.
+            <br>
+            <br>
+        </md-card-content>
+    </md-card>
+
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <h1>Signal sample</h1>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+
+        </md-card-content>
+    </md-card>
+
+    <md-card>
+        <md-card-title>
+            <md-card-title-text>
+                <h1>Background sample</h1>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+
+        </md-card-content>
+    </md-card>
 
     <md-button class="md-primary signalbtn md-raised" ng-click="go('/analysis')">
-        Signal
+        Continue to Analysis Exercise
     </md-button>
 
     <!-- old buttons, delete when alternative is implemented -
