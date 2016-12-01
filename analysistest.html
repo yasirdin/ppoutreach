@@ -67,11 +67,10 @@
                         <div layout="column">
                             <md-button class="md-raised md-primary" ng-click="purityPlotPoint('$scope.currentDatapoint')">Check Purity</md-button>
                             <md-button class="md-raised md-primary" ng-click="significancePlotPoint('$scope.currentSignificanceDatapoint')">Check Significance</md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('mbb', '.mbbPurityScatter')">Reveal purity points</md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('mbb', '.mbbSignificanceScatter')">Reveal significance points</md-button>
                         </div>
                         <md-button  class="md-raised md-warn" ng-click="showDialog($event)">Finalise cut selection</md-button>
-
-                        <h1>Current Significance: {{ currentSignificanceDatapoint }}</h1>
-                        <h1>Current Purity: {{ currentPurityDatapoint }}</h1>
                     </md-card>
 
                 </div>

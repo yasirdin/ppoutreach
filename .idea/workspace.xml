@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5b69412a-d133-4600-bb2e-d05b01908a3f" name="Default" comment="purity and significance precomputed for mbb">
+    <list default="true" id="5b69412a-d133-4600-bb2e-d05b01908a3f" name="Default" comment="reveal all significance and purity points working for mbb">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysistest.controller.js" afterPath="$PROJECT_DIR$/analysistest.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysistest.html" afterPath="$PROJECT_DIR$/analysistest.html" />
@@ -68,8 +68,8 @@
       <file leaf-file-name="analysis.controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysis.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
-              <caret line="182" column="13" selection-start-line="182" selection-start-column="13" selection-end-line="182" selection-end-column="13" />
+            <state relative-caret-position="597">
+              <caret line="250" column="58" selection-start-line="250" selection-start-column="58" selection-end-line="250" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -78,8 +78,8 @@
       <file leaf-file-name="analysistest.controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analysistest.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="756">
-              <caret line="489" column="8" selection-start-line="489" selection-start-column="8" selection-end-line="489" selection-end-column="8" />
+            <state relative-caret-position="470">
+              <caret line="399" column="35" selection-start-line="399" selection-start-column="35" selection-end-line="399" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -88,8 +88,8 @@
       <file leaf-file-name="analysistest.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysistest.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-154">
-              <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+            <state relative-caret-position="711">
+              <caret line="70" column="129" selection-start-line="70" selection-start-column="129" selection-end-line="70" selection-end-column="129" />
               <folding />
             </state>
           </provider>
@@ -98,7 +98,7 @@
       <file leaf-file-name="analysistwo.controller.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysistwo.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="549">
+            <state relative-caret-position="753">
               <caret line="306" column="60" selection-start-line="306" selection-start-column="60" selection-end-line="306" selection-end-column="60" />
               <folding />
             </state>
@@ -175,9 +175,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="24" />
-    <option name="width" value="1920" />
-    <option name="height" value="1176" />
+    <option name="y" value="52" />
+    <option name="width" value="1447" />
+    <option name="height" value="1148" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -391,7 +391,7 @@
       <workItem from="1475152774535" duration="71549000" />
       <workItem from="1476099198540" duration="139842000" />
       <workItem from="1477918003664" duration="189112000" />
-      <workItem from="1479724502452" duration="44451000" />
+      <workItem from="1479724502452" duration="77634000" />
     </task>
     <task id="LOCAL-00001" summary="fixed issue with plotting re-binned cut data">
       <created>1471355032790</created>
@@ -596,11 +596,18 @@
       <option name="project" value="LOCAL" />
       <updated>1479818524026</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="precomputed purity and significance plots working for mbb">
+      <created>1479994007194</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1479994007194</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1215354000" />
+    <option name="totallyTimeSpent" value="1248537000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -612,11 +619,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="24" width="1920" height="1176" extended-state="6" />
+    <frame x="0" y="52" width="1447" height="1148" extended-state="4" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12651555" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16853933" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32911393" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931355" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.66907775" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32640144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -625,7 +633,6 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962963" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -646,8 +653,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added tabs for each variables in the analysis exercise" />
-    <MESSAGE value="added ability to cut on mbb variable, with cut affecting full multivariate dataset" />
     <MESSAGE value="rounded down data to 3 decimal places" />
     <MESSAGE value="added JS object to store x-y plot scales for each variable on the $scope" />
     <MESSAGE value="dynamic cut-view working on multiple variables" />
@@ -671,7 +676,9 @@
     <MESSAGE value="added tabs for reach var in analysistest.html" />
     <MESSAGE value="added d3 brush support" />
     <MESSAGE value="purity and significance precomputed for mbb" />
-    <option name="LAST_COMMIT_MESSAGE" value="purity and significance precomputed for mbb" />
+    <MESSAGE value="precomputed purity and significance plots working for mbb" />
+    <MESSAGE value="reveal all significance and purity points working for mbb" />
+    <option name="LAST_COMMIT_MESSAGE" value="reveal all significance and purity points working for mbb" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -976,22 +983,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysistwo.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="306" column="60" selection-start-line="306" selection-start-column="60" selection-end-line="306" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis.controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="182" column="13" selection-start-line="182" selection-start-column="13" selection-end-line="182" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="581">
@@ -1000,18 +991,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/analysis.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="250" column="58" selection-start-line="250" selection-start-column="58" selection-end-line="250" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysistwo.controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="753">
+          <caret line="306" column="60" selection-start-line="306" selection-start-column="60" selection-end-line="306" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/analysistest.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-154">
-          <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+        <state relative-caret-position="711">
+          <caret line="70" column="129" selection-start-line="70" selection-start-column="129" selection-end-line="70" selection-end-column="129" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/analysistest.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="489" column="8" selection-start-line="489" selection-start-column="8" selection-end-line="489" selection-end-column="8" />
+        <state relative-caret-position="470">
+          <caret line="399" column="35" selection-start-line="399" selection-start-column="35" selection-end-line="399" selection-end-column="35" />
           <folding />
         </state>
       </provider>
