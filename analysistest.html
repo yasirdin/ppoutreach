@@ -33,7 +33,7 @@
                         <md-card-content>
                             <div class="mbbHistSigBg"></div>
                             <br>
-                            <text> <h1>Current cut value:</h1> {{ newSelection }} </text>
+                            <text> <h1>Current cut value:</h1> {{ newSelection["mbb"] }} </text>
                             <div class="mbbSigOverBg"></div>
                         </md-card-content>
                     </md-card>
@@ -70,7 +70,7 @@
                             <md-button class="md-raised md-primary" ng-click="revealPurityPoints('mbb', '.mbbPurityScatter')">Reveal purity points</md-button>
                             <md-button class="md-raised md-primary" ng-click="revealSigPoints('mbb', '.mbbSignificanceScatter')">Reveal significance points</md-button>
                         </div>
-                        <md-button  class="md-raised md-warn" ng-click="showDialog($event)">Finalise cut selection</md-button>
+                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('mbb')">Finalise cut selection</md-button>
                     </md-card>
 
                 </div>
@@ -128,7 +128,7 @@
                             <md-button class="md-raised md-primary" ng-click="revealPurityPoints('dr', '.drPurityScatter')">Reveal purity points</md-button>
                             <md-button class="md-raised md-primary" ng-click="revealSigPoints('dr', '.drSignificanceScatter')">Reveal significance points</md-button>
                         </div>
-                        <md-button  class="md-raised md-warn" ng-click="showDialog($event)">Finalise cut selection</md-button>
+                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('dr')">Finalise cut selection</md-button>
                     </md-card>
 
                 </div>
@@ -186,7 +186,7 @@
                             <md-button class="md-raised md-primary" ng-click="revealPurityPoints('hpt', '.hptPurityScatter')">Reveal purity points</md-button>
                             <md-button class="md-raised md-primary" ng-click="revealSigPoints('hpt', '.hptSignificanceScatter')">Reveal significance points</md-button>
                         </div>
-                        <md-button  class="md-raised md-warn" ng-click="showDialog($event)">Finalise cut selection</md-button>
+                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('hpt')">Finalise cut selection</md-button>
                     </md-card>
 
                 </div>
@@ -243,7 +243,7 @@
                             <md-button class="md-raised md-primary" ng-click="revealPurityPoints('taupt', '.tauptPurityScatter')">Reveal purity points</md-button>
                             <md-button class="md-raised md-primary" ng-click="revealSigPoints('taupt', '.tauptSignificanceScatter')">Reveal significance points</md-button>
                         </div>
-                        <md-button  class="md-raised md-warn" ng-click="showDialog($event)">Finalise cut selection</md-button>
+                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('taupt')">Finalise cut selection</md-button>
                     </md-card>
                 </div>
             </md-content>

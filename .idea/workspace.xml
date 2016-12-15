@@ -5,8 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysistest.controller.js" afterPath="$PROJECT_DIR$/analysistest.controller.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysistest.html" afterPath="$PROJECT_DIR$/analysistest.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
     </list>
     <ignored path="ppoutreach_yasir.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,8 +78,18 @@
       <file leaf-file-name="analysistest.controller.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/analysistest.controller.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
-              <caret line="272" column="26" selection-start-line="272" selection-start-column="26" selection-end-line="272" selection-end-column="26" />
+            <state relative-caret-position="474">
+              <caret line="604" column="0" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="selection.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/selection.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -90,8 +98,8 @@
       <file leaf-file-name="analysistest.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analysistest.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="35" column="78" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
+            <state relative-caret-position="997">
+              <caret line="245" column="90" selection-start-line="245" selection-start-column="90" selection-end-line="245" selection-end-column="90" />
               <folding />
             </state>
           </provider>
@@ -395,7 +403,7 @@
       <workItem from="1477918003664" duration="189112000" />
       <workItem from="1479724502452" duration="117682000" />
       <workItem from="1481544914415" duration="12389000" />
-      <workItem from="1481755511272" duration="15473000" />
+      <workItem from="1481755511272" duration="21386000" />
     </task>
     <task id="LOCAL-00001" summary="fixed issue with plotting re-binned cut data">
       <created>1471355032790</created>
@@ -614,11 +622,18 @@
       <option name="project" value="LOCAL" />
       <updated>1480590172838</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="all sig/purity plotting function working for all vars">
+      <created>1481803866528</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1481803866528</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1316447000" />
+    <option name="totallyTimeSpent" value="1322360000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -664,7 +679,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="rounded down data to 3 decimal places" />
     <MESSAGE value="added JS object to store x-y plot scales for each variable on the $scope" />
     <MESSAGE value="dynamic cut-view working on multiple variables" />
     <MESSAGE value="removed test pt hist and stored plot constants on $scope" />
@@ -689,7 +703,8 @@
     <MESSAGE value="purity and significance precomputed for mbb" />
     <MESSAGE value="precomputed purity and significance plots working for mbb" />
     <MESSAGE value="reveal all significance and purity points working for mbb" />
-    <option name="LAST_COMMIT_MESSAGE" value="reveal all significance and purity points working for mbb" />
+    <MESSAGE value="all sig/purity plotting function working for all vars" />
+    <option name="LAST_COMMIT_MESSAGE" value="all sig/purity plotting function working for all vars" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -832,13 +847,6 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/selection.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1014,16 +1022,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/analysistest.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="35" column="78" selection-start-line="35" selection-start-column="78" selection-end-line="35" selection-end-column="78" />
+        <state relative-caret-position="997">
+          <caret line="245" column="90" selection-start-line="245" selection-start-column="90" selection-end-line="245" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/selection.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/analysistest.controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="272" column="26" selection-start-line="272" selection-start-column="26" selection-end-line="272" selection-end-column="26" />
+        <state relative-caret-position="474">
+          <caret line="604" column="0" selection-start-line="604" selection-start-column="0" selection-end-line="604" selection-end-column="0" />
           <folding />
         </state>
       </provider>

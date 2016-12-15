@@ -5,15 +5,6 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
         $location.path(path);
     };
 
-    //dialogue for finalising cut selection:
-    $scope.showDialog = function(ev) {
-        $mdDialog.show(
-            $mdDialog.alert()
-                .textContent('Are you sure you want to finalise this cut selection?')
-                .ok('Yes!')
-        )
-    };
-
     ////// CONSTANTS //////
     $scope.combinedData = {};
 
@@ -35,6 +26,8 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
     $scope.puritySigValues = {};
 
     $scope.newSelection = {};
+
+    $scope.finalisedCuts = {};
 
     $scope.bincount = 60;
 
@@ -263,15 +256,15 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
 
             $scope.newSelection[varName] = closestVal;
 
-            //console.log("new selection", $scope.newSelection);
+            console.log("New Selection", $scope.newSelection);
         }
 
         function end() {
-            //insert logic
+            //INSERT LOGIC
         }
 
         function start() {
-            //insert logic
+            //INSERT LOGIC
         }
 
         //TODO: add function to reveal and hide scatter plot after the user has attempted to add a few points to the purity and significance plots
@@ -600,6 +593,27 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
             .attr("r", 3)
             .attr("cx", function(d) { return x(d[0]) })
             .attr("cy", function(d) { return y(d[2]) })
+    };
+
+    $scope.finaliseCut = function(varName) {
+
+        var confirm = $mdDialog.confirm()
+            .title('Would you like to finalise your cut selection?')
+            .textContent('Make sure your cut value gives you maximum purity and significance')
+            .ok('Yes!')
+            .cancel('No, adjust cut');
+
+        $mdDialog.show(confirm)
+            .then(function() {
+                var finalVal = $scope.newSelection[varName];
+
+                console.log(finalVal);
+
+                //store finalised cut value in $scope.finalisedCuts
+                $scope.finalisedCuts[varName] = finalVal;
+
+                console.log($scope.finalisedCuts);
+            });
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
