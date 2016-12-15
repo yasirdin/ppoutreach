@@ -595,11 +595,13 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
             .attr("cy", function(d) { return y(d[2]) })
     };
 
+    $scope.selectedTab = null;
+
     $scope.finaliseCut = function(varName) {
 
         var confirm = $mdDialog.confirm()
             .title('Would you like to finalise your cut selection?')
-            .textContent('Make sure your cut value gives you maximum purity and significance')
+            .textContent("Make sure your cut value gives you maximum purity and significance. Selecting 'Yes!' will move you onto the next variable.")
             .ok('Yes!')
             .cancel('No, adjust cut');
 
@@ -613,7 +615,12 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
                 $scope.finalisedCuts[varName] = finalVal;
 
                 console.log($scope.finalisedCuts);
+
+                //switching to the next tab:
+                $scope.selectedTab = ($scope.selectedTab + 1) % 4;
             });
+
+
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -681,278 +688,6 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
             $scope.significancePlot(".drSignificanceScatter", "dr");
             $scope.significancePlot(".hptSignificanceScatter", "hpt");
             $scope.significancePlot(".tauptSignificanceScatter", "taupt");
-
-            console.log($scope.puritySigValues);
-
-            ///////////////////////////////////////////////////////////
-            //combined data stored on $scope.combinedData object:
-
-            /*
-            $scope.$watch('sliderModel', function(sliderVal) {
-               console.log(sliderVal);
-            }, true);
-            */
-
-            //plotting purity plots:
-
-            //plotting significance plots:
-
-
-            //TODO: cutting function for mbb:
-            //setting slider limits and cutting function:
-            //$scope.sliderCut("#mbbSlider", "mbbSlider", varExtract($scope.mainData, 0), 0);
-
-            //cutting the data:
-
-            /*
-             $scope.$watch('cutMainData', function (data) {
-             $scope.mbbCut = varExtract(data, 0);
-             }, true);
-
-             $scope.$watch("mbbCut", function(data) {
-             if (data) {
-             $scope.cutPlot(data, ".mbbHistSigBg", 60, "mbb");
-             }
-             });
-
-             //TODO: watching the whole of cutMainData may have some performance reprecussions, check this:
-             //can merge this with the $watch(cutMainData above here)
-             //SIGNAL/BACKGROUND count
-             $scope.$watch('cutMainData', function(data) {
-             //extracting final signal background label column
-             var sigBgColumn = varExtract(data, 4);
-
-             //counting signal and backgrounds:
-             var sigCount = 0;
-             for (i = 0; i < sigBgColumn.length; i++) {
-             if (sigBgColumn[i] == "S") {
-             sigCount++;
-             }
-             }
-
-             var bgCount = 0;
-             for (i = 0; i < sigBgColumn.length; i++) {
-             if(sigBgColumn[i] == "B") {
-             bgCount++;
-             }
-             }
-
-             //TODO: limit the number of decimal places this is calculated to:
-             //calculating signal/background ratio:
-             $scope.sigEfficiency = (sigCount / data.length).toFixed(2) * 100;
-
-             });
-
-             ///////////////////////// precomputing signal purity /////////////////////////////////
-
-             //navigate to html object for the slider:
-             var mbbSliderElement = document.getElementById("mbbSlider");
-
-             //retrieve the attributes:
-             var mbbMin = mbbSliderElement.getAttribute("min"),
-             mbbMax = mbbSliderElement.getAttribute("max"),
-             mbbStep = mbbSliderElement.getAttribute("step");
-
-             //compute the number of entries in the array:
-             var mbbEntriesNum = Math.round((mbbMax - mbbMin) / (mbbStep));
-
-             //array to contain all the values the slider can take:
-             var mbbSliderValsArray = [];
-
-             for (i = 0; i < mbbEntriesNum + 1; i++) {
-             mbbSliderValsArray.push(Math.round(mbbMin + i*mbbStep));
-             }
-
-             //extract mbb from maindata:
-             var mbbCombined = varExtract($scope.mainData, 0);
-             var mbbCombined2 = varExtract($scope.mainData, 4);
-
-             //combining mbbCombined and mbbCombined2 into a nested array:
-             var mbbCombinedFull = [];
-
-             for (i = 0; i < mbbCombined.length; i++) {
-             mbbCombinedFull.push([mbbCombined[i], mbbCombined2[i]]);
-             }
-
-             //function for filtering nested array:
-
-             function cutCheck(entry) {
-             if (entry)
-             //only for first column '[0]':
-             return entry[0] <= sliderValue;
-             }
-
-             var significanceValsArray = [];
-             var purityValsArray = [];
-
-             //iterating over slider values and calculating purities for each configuration:
-             for (i = 0; i < mbbSliderValsArray.length; i++) {
-
-             var sliderValue = mbbSliderValsArray[i];
-
-             //defines a cutMbbArray for this iterations slider value:
-             var cutMbbArray = mbbCombinedFull.filter(cutCheck);
-
-             //slicing the signal/background column:
-             var sigBgColumn = varExtract(cutMbbArray, 1);
-
-             var sigCount = 0;
-             var bgCount = 0;
-             for (var j = 0; j < sigBgColumn.length ; j++) {
-             if (sigBgColumn[j] == "S") {
-             sigCount++;
-             }
-             if (sigBgColumn[j] == "B") {
-             bgCount++;
-             }
-             }
-
-             //calculating purity given sigCount and bgCount:
-             var purity = sigCount / (sigCount + bgCount) * 100;
-             var purity = purity.toFixed(2);
-             purityValsArray.push(purity);
-
-             //calculating significance given sigCount and bgCount:
-             var significance = sigCount / Math.sqrt((sigCount + bgCount) * 100);
-             var significance = significance.toFixed(2);
-             significanceValsArray.push(significance);
-             }
-
-             //combining purity and slider values into nested array:
-             var mbbPurityCutVals = [];
-             for (i = 0; i < purityValsArray.length; i++ ) {
-             mbbPurityCutVals.push([mbbSliderValsArray[i], purityValsArray[i]])
-             }
-
-             //combining significance and slider values into nested array:
-             var mbbSignificanceCutVals = [];
-             for (i = 0; i < significanceValsArray.length; i++) {
-             mbbSignificanceCutVals.push([mbbSliderValsArray[i], significanceValsArray[i]])
-             }
-
-             ///////plotting purity VS mbbSliderValsArray///////////////
-             var c = $scope.plotConstants;
-
-             var svg = d3.select(".mbbPurityScatter").append("svg")
-             .attr("width", c.width + c.margin.left + c.margin.right)
-             .attr("height", c.height + c.margin.top + c.margin.bottom)
-             .append("g")
-             .attr("transform", "translate(" + c.margin.left + "," + c.margin.top + ")");
-
-             var x = d3.scaleLinear()
-             .domain([d3.min(mbbSliderValsArray), d3.max(mbbSliderValsArray)])
-             .rangeRound([ 0, c.width ]);
-
-             var y = d3.scaleLinear()
-             .domain([d3.min(purityValsArray), 70])
-             .range([ c.height, 0 ]);
-
-             var xAxis = svg.append("g")
-             .attr("transform", "translate(0," + c.height + ")");
-
-             xAxis.call(d3.axisBottom(x));
-
-             var yAxis = svg.append("g")
-             .attr("transform", "translate(0, 0)");
-
-             yAxis.call(d3.axisLeft(y));
-
-             //defining group to add points:
-             var g = svg.append("g");
-
-             var binding =  g.selectAll(".point")
-             .data(mbbPurityCutVals);
-
-             //watch current slider position:
-             $scope.$watch("mbbSlider", function(sliderCurrent) {
-             function filter(entry) {
-             if (entry[0] == sliderCurrent) {
-             return entry;
-             }
-             }
-             //filtering for array corresponding to slider value:
-             $scope.currentPurityDatapoint = mbbPurityCutVals.filter(filter);
-             });
-
-             //TODO: initiate this using an ngClick
-             $scope.purityPlotPoint = function () {
-
-             var d = $scope.currentPurityDatapoint;
-
-             //TODO: change the second entry into a number, not string:
-
-             binding.enter().append("svg:circle")
-             .attr("r", 3)
-             .attr("cx", x(d[0][0]))
-             .attr("cy", y(d[0][1]));
-
-             };
-
-             /////////////////////////////////////////////  PLOTTING SIGNIFICANCE  ///////////////////////////////////
-             $scope.significancePlot = function() {
-             var c = $scope.plotConstants;
-
-             var svg = d3.select(".mbbSignificanceScatter").append("svg")
-             .attr("width", c.width + c.margin.left + c.margin.right)
-             .attr("height", c.height + c.margin.top + c.margin.bottom)
-             .append("g")
-             .attr("transform", "translate(" + c.margin.left + "," + c.margin.top + ")");
-
-             var x = d3.scaleLinear()
-             .domain([d3.min(mbbSliderValsArray), d3.max(mbbSliderValsArray)])
-             .rangeRound([ 0, c.width ]);
-
-             var y = d3.scaleLinear()
-             .domain([d3.min(significanceValsArray), 10])
-             .range([ c.height, 0 ]);
-
-             var xAxis = svg.append("g")
-             .attr("transform", "translate(0," + c.height + ")");
-
-             xAxis.call(d3.axisBottom(x));
-
-             var yAxis = svg.append("g")
-             .attr("transform", "translate(0, 0)");
-
-             yAxis.call(d3.axisLeft(y));
-
-             var g = svg.append("g");
-
-             var binding =  g.selectAll(".point")
-             .data(mbbSignificanceCutVals);
-
-             //watch current slider position:
-             $scope.$watch("mbbSlider", function(sliderCurrent) {
-             function filter(entry) {
-             if (entry[0] == sliderCurrent) {
-             return entry;
-             }
-             }
-             //filtering for array corresponding to slider value:
-             $scope.currentSignificanceDatapoint = mbbSignificanceCutVals.filter(filter);
-             });
-
-             //TODO: initiate this using an ngClick
-             $scope.significancePlotPoint = function () {
-
-             var d = $scope.currentSignificanceDatapoint;
-
-             //TODO: change the second entry into a number, not string:
-
-             binding.enter().append("svg:circle")
-             .attr("r", 3)
-             .attr("cx", x(d[0][0]))
-             .attr("cy", y(d[0][1]));
-
-             };
-             };
-
-             //initialising significance plot function:
-             $scope.significancePlot();
-
-             //TODO: import in data as json, var extract and plot all of the variables on each tabs
-
-             */
         });
     });
 }]);
