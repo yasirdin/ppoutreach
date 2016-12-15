@@ -17,7 +17,18 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
     ////// CONSTANTS //////
     $scope.combinedData = {};
 
+    //histogram plot scales:
     $scope.plotScales = {};
+
+    //purity plot scales:
+    $scope.purityPlotScales = {};
+
+    $scope.purityPointBindings = {};
+
+    $scope.significancePointBindings = {};
+
+    //significance plot scales:
+    $scope.significancePlotScales = {};
 
     $scope.brushCutValues = {};
 
@@ -234,6 +245,9 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
             return current;
         }
 
+        //object to store newSelection for each variable (using 0 as a placeholder):
+        $scope.newSelection[varName] = 0;
+
         //functions for brush:
         function brushed() {
             if (!d3.event.sourceEvent) return;
@@ -247,7 +261,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
 
             var closestVal = closest(currentBrushVals[1], cutValsArray);
 
-            $scope.newSelection = closestVal;
+            $scope.newSelection[varName] = closestVal;
 
             //console.log("new selection", $scope.newSelection);
         }
@@ -294,10 +308,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
 
             //filtering data -- applies cuts across all variables:
             $scope.cutMainData = data.filter(cutCheck);
-
         });
-
-        //cutting data using brush value:
 
     };
 
@@ -306,6 +317,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
     $scope.puritySigCalculator = function(combinedData, sliderVals, varName) {
 
         var data = combinedData;
+
         //note: sliderVals are stored inside a JSON object with values for each variable nested within it
         var sliderValsArray = sliderVals.values[0];
 
@@ -359,22 +371,36 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
 
             //3. calculate purity and significance given sigcount and bgcount
 
-            //PURITY:
+            //PURITY//:
             var purity = sigCount / (sigCount + bgCount) * 100;
             var purity = purity.toFixed(2);
+            //if purity value is NaN, change it to 0:
+
+            if (purity === "NaN") {
+                var purity = "0.00";
+            }
+
             purityArray.push(purity);
 
-            //SIGNIFICANCE:
+            //SIGNIFICANCE//:
             var significance = sigCount / Math.sqrt((sigCount + bgCount) * 100);
             var significance = significance.toFixed(2);
+            //if significance value is NaN, change it to 0:
+
+            if (significance === "NaN") {
+                var significance = "0.00";
+            }
+
             significanceArray.push(significance);
         }
 
+        //appending all the values to puritySigValues which contains all precomputed vals
         for (i = 0; i < sliderValsArray.length; i++) {
             $scope.puritySigValues[varName].push([sliderValsArray[i], purityArray[i], significanceArray[i]]);
         }
     };
 
+    //TODO: fix y-axis problem with taupt
     $scope.purityPlot = function(histClass, varName) {
 
         var c = $scope.plotConstants;
@@ -390,12 +416,17 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
         var purityValsArray = $scope.varExtract($scope.puritySigValues[varName], 1);
 
         var x = d3.scaleLinear()
-            .domain([d3.min(sliderValsArray), d3.max(sliderValsArray)])
+            .domain([d3.min(sliderValsArray, function(d) { return +d}), d3.max(sliderValsArray, function(d) { return +d})])
             .rangeRound([ 0, c.width ]);
 
         var y = d3.scaleLinear()
             .domain([d3.min(purityValsArray), d3.max(purityValsArray)])
             .range([ c.height, 0 ]);
+
+        //saving scales to scope object for purity:
+        $scope.purityPlotScales[varName] = {};
+        $scope.purityPlotScales[varName].x = x;
+        $scope.purityPlotScales[varName].y = y;
 
         var xAxis = svg.append("g")
             .attr("transform", "translate(0," + c.height + ")");
@@ -413,20 +444,27 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
         var binding =  g.selectAll(".point")
             .data($scope.puritySigValues[varName]);
 
-        //TODO: initiate this using an ngClick
-        $scope.purityPlotPoint = function() {
+        //saving binding to the $scope.pointBindings object:
+        $scope.purityPointBindings[varName] = binding;
 
-            var d = $scope.puritySigValues[varName].filter(function(entry) { return entry[0] == $scope.newSelection});
+    };
 
-            console.log(d);
+    $scope.purityPlotPoint = function(plotClass, varName) {
 
-            //TODO: change the second entry into a number, not string:
+        //fetching scales from $scope object:
+        var x = $scope.purityPlotScales[varName].x;
+        var y = $scope.purityPlotScales[varName].y;
 
-            binding.enter().append("svg:circle")
-                .attr("r", 3)
-                .attr("cx", x(d[0][0]))
-                .attr("cy", y(d[0][1]));
-        };
+        var binding = $scope.purityPointBindings[varName];
+
+        var d = $scope.puritySigValues[varName].filter(function(entry) { return entry[0] == $scope.newSelection[varName]});
+
+        //TODO: change the second entry into a number, not string:
+
+        binding.enter().append("svg:circle")
+            .attr("r", 3)
+            .attr("cx", x(d[0][0]))
+            .attr("cy", y(d[0][1]));
     };
 
     $scope.significancePlot = function(histClass, varName) {
@@ -451,6 +489,10 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
             .domain([d3.min(sigValsArray), d3.max(sigValsArray)])
             .range([ c.height, 0 ]);
 
+        //saving scales to $scope object for significance:
+        $scope.significancePlotScales[varName] = {};
+        $scope.significancePlotScales[varName].x = x;
+        $scope.significancePlotScales[varName].y = y;
 
         var xAxis = svg.append("g")
             .attr("transform", "translate(0," + c.height + ")");
@@ -469,22 +511,28 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
         var binding =  g.selectAll(".point")
             .data($scope.puritySigValues[varName]);
 
-        //TODO: initiate this using an ngClick
-        $scope.significancePlotPoint = function() {
-
-            var d = $scope.puritySigValues[varName].filter(function(entry) { return entry[0] == $scope.newSelection});
-
-            console.log(d);
-
-            //TODO: change the second entry into a number, not string:
-
-            binding.enter().append("svg:circle")
-                .attr("r", 3)
-                .attr("cx", x(d[0][0]))
-                .attr("cy", y(d[0][2]));
-        };
+        $scope.significancePointBindings[varName] = binding;
     };
 
+    $scope.significancePlotPoint = function(histClass, varName) {
+
+        //fetching scales from $scope object:
+        var x = $scope.significancePlotScales[varName].x;
+        var y = $scope.significancePlotScales[varName].y;
+        
+        var binding = $scope.significancePointBindings[varName];
+
+        var d = $scope.puritySigValues[varName].filter(function(entry) { return entry[0] == $scope.newSelection[varName]});
+
+        console.log(d);
+
+        //TODO: change the second entry into a number, not string:
+
+        binding.enter().append("svg:circle")
+            .attr("r", 3)
+            .attr("cx", x(d[0][0]))
+            .attr("cy", y(d[0][2]));
+    };
 
     //Note: following function is called using ng-click in the analysis.html:
     $scope.revealPurityPoints = function(varName, purityHistClass) {
@@ -500,7 +548,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
         var purityValsArray = $scope.varExtract($scope.puritySigValues[varName], 1);
 
         var x = d3.scaleLinear()
-            .domain([d3.min(sliderValsArray), d3.max(sliderValsArray)])
+            .domain([d3.min(sliderValsArray, function(d) { return +d}), d3.max(sliderValsArray, function(d) { return +d})])
             .rangeRound([ 0, c.width ]);
 
         var y = d3.scaleLinear()
@@ -534,7 +582,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
         var sigValsArray = $scope.varExtract($scope.puritySigValues[varName], 2);
 
         var x = d3.scaleLinear()
-            .domain([d3.min(sliderValsArray), d3.max(sliderValsArray)])
+            .domain([d3.min(sliderValsArray, function(d) { return +d}), d3.max(sliderValsArray, function(d) { return +d})])
             .rangeRound([ 0, c.width ]);
 
         var y = d3.scaleLinear()
@@ -553,9 +601,6 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
             .attr("cx", function(d) { return x(d[0]) })
             .attr("cy", function(d) { return y(d[2]) })
     };
-
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////LOADING IN DATA AND CALLING FUNCTIONS:///////////////////////////////////////////
@@ -591,36 +636,41 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
 
             //plotting static signal over background plot:
             $scope.histPlot($scope.mbbSig, $scope.mbbBg, ".mbbHistSigBg", "mbb");
-            //$scope.histPlot($scope.drSig, $scope.drBg, ".drHistSigBg", "dr");
-            //$scope.histPlot($scope.hptSig, $scope.hptBg, ".hptHistSigBg", "hpt");
-            //$scope.histPlot($scope.tauptSig, $scope.tauptBg, ".tauptHistSigBg", "taupt");
+            $scope.histPlot($scope.drSig, $scope.drBg, ".drHistSigBg", "dr");
+            $scope.histPlot($scope.hptSig, $scope.hptBg, ".hptHistSigBg", "hpt");
+            $scope.histPlot($scope.tauptSig, $scope.tauptBg, ".tauptHistSigBg", "taupt");
 
             //combining signal and background datasets:
             $scope.combineData($scope.mbbSig, $scope.mbbBg, "mbb");
-            //$scope.combineData($scope.drSig, $scope.drBg, "dr");
-            //$scope.combineData($scope.hptSig, $scope.hptBg, "hpt");
-            //$scope.combineData($scope.tauptSig, $scope.tauptBg, "taupt");
+            $scope.combineData($scope.drSig, $scope.drBg, "dr");
+            $scope.combineData($scope.hptSig, $scope.hptBg, "hpt");
+            $scope.combineData($scope.tauptSig, $scope.tauptBg, "taupt");
+
 
             $scope.mbbCombinedData = $scope.combinedData["mbb"].data;
-            //$scope.drCombinedData = $scope.combinedData["dr"].data;
-            //$scope.hptCombinedData = $scope.combinedData["hpt"].data;
-            //$scope.tauptCombinedData = $scope.combinedData["taupt"].data;
+            $scope.drCombinedData = $scope.combinedData["dr"].data;
+            $scope.hptCombinedData = $scope.combinedData["hpt"].data;
+            $scope.tauptCombinedData = $scope.combinedData["taupt"].data;
 
             //precomputing purity and sig values:
             $scope.puritySigCalculator($scope.mbbCombinedData, $scope.brushCutValues["mbb"], "mbb");
-            //$scope.puritySigCalculator($scope.drCombinedData, $scope.brushCutValues["dr"], "dr");
+            $scope.puritySigCalculator($scope.drCombinedData, $scope.brushCutValues["dr"], "dr");
+            $scope.puritySigCalculator($scope.hptCombinedData, $scope.brushCutValues["hpt"], "hpt");
+            $scope.puritySigCalculator($scope.tauptCombinedData, $scope.brushCutValues["taupt"], "taupt");
 
             $scope.purityPlot(".mbbPurityScatter", "mbb");
-            //$scope.purityPlot(".drPurityScatter", "dr");
+            $scope.purityPlot(".drPurityScatter", "dr");
+            $scope.purityPlot(".hptPurityScatter", "hpt");
+            $scope.purityPlot(".tauptPurityScatter", "taupt");
 
             $scope.significancePlot(".mbbSignificanceScatter", "mbb");
+            $scope.significancePlot(".drSignificanceScatter", "dr");
+            $scope.significancePlot(".hptSignificanceScatter", "hpt");
+            $scope.significancePlot(".tauptSignificanceScatter", "taupt");
 
-
-
+            console.log($scope.puritySigValues);
 
             ///////////////////////////////////////////////////////////
-
-
             //combined data stored on $scope.combinedData object:
 
             /*
@@ -628,7 +678,6 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
                console.log(sliderVal);
             }, true);
             */
-
 
             //plotting purity plots:
 

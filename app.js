@@ -1,4 +1,4 @@
-var ppoutreach = angular.module('ppoutreach', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngCookies', 'rzModule', 'ui-rangeSlider']);
+var ppoutreach = angular.module('ppoutreach', ['ui.router', 'ngMaterial', 'ngMdIcons', 'ngCookies', 'rzModule', 'ui-rangeSlider', 'ncy-angular-breadcrumb']);
 
 //cookies service, putting cookie functions in service makes it accessible to all controllers:
 ppoutreach.factory('userPersistenceService', ['$cookies', function($cookies) {
@@ -40,13 +40,24 @@ ppoutreach.config(function($mdThemingProvider) {
         .backgroundPalette('blue');
 });
 
+//breadcrumb config:
+ppoutreach.config(function($breadcrumbProvider) {
+    $breadcrumbProvider.setOptions({
+        template: 'bootstrap2',
+        prefixStateName: 'Selection'
+    });
+});
+
 ppoutreach.config(['$urlRouterProvider', '$stateProvider' , function($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/');
     $stateProvider
         .state('Login', {
             url: '/',
             templateUrl: 'login.html',
-            controller: 'loginController'
+            controller: 'loginController',
+            ncyBreadcrumb: {
+                label: 'login'
+            }
         })
         .state('Selection', {
             url: '/selection',

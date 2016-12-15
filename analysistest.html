@@ -33,7 +33,7 @@
                         <md-card-content>
                             <div class="mbbHistSigBg"></div>
                             <br>
-                            <text> Signal efficiency: {{ sigEfficiency }} </text>
+                            <text> <h1>Current cut value:</h1> {{ newSelection }} </text>
                             <div class="mbbSigOverBg"></div>
                         </md-card-content>
                     </md-card>
@@ -65,8 +65,8 @@
                             insert something which watches the cut value and prints the current significance and purity
                         </div>
                         <div layout="column">
-                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('$scope.currentDatapoint')">Check Purity</md-button>
-                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('$scope.currentSignificanceDatapoint')">Check Significance</md-button>
+                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.mbbPurityScatter', 'mbb')">Check Purity</md-button>
+                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.mbbSignificanceScatter', 'mbb')">Check Significance</md-button>
                             <md-button class="md-raised md-primary" ng-click="revealPurityPoints('mbb', '.mbbPurityScatter')">Reveal purity points</md-button>
                             <md-button class="md-raised md-primary" ng-click="revealSigPoints('mbb', '.mbbSignificanceScatter')">Reveal significance points</md-button>
                         </div>
@@ -89,17 +89,17 @@
                             </md-card-title-text>
                         </md-card-title>
                         <md-card-content>
-                            <div class="drHistSigBg mbb"></div>
+                            <div class="drHistSigBg"></div>
                             <br>
                             <text> Signal efficiency: {{ sigEfficiency }} </text>
-                            <div class="mbbSigOverBg"></div>
+                            <div class="drSigOverBg"></div>
                         </md-card-content>
                     </md-card>
 
                     <md-card>
                         <md-card-title>
                             <md-card-title-text>
-                                <span class="md-headline">mbb signal purity plot</span>
+                                <span class="md-headline">dr signal purity plot</span>
                             </md-card-title-text>
                         </md-card-title>
                         <md-card-content layout-align="center center">
@@ -118,7 +118,18 @@
                         </md-card-content>
                     </md-card>
 
-
+                    <md-card>
+                        <div>
+                            insert something which watches the cut value and prints the current significance and purity
+                        </div>
+                        <div layout="column">
+                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.drPurityScatter', 'dr')">Check Purity</md-button>
+                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.drSignificanceScatter', 'dr')">Check Significance</md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('dr', '.drPurityScatter')">Reveal purity points</md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('dr', '.drSignificanceScatter')">Reveal significance points</md-button>
+                        </div>
+                        <md-button  class="md-raised md-warn" ng-click="showDialog($event)">Finalise cut selection</md-button>
+                    </md-card>
 
                 </div>
             </md-content>
@@ -146,11 +157,11 @@
                     <md-card>
                         <md-card-title>
                             <md-card-title-text>
-                                <span class="md-headline">mbb signal purity plot</span>
+                                <span class="md-headline">hpt signal purity plot</span>
                             </md-card-title-text>
                         </md-card-title>
                         <md-card-content layout-align="center center">
-                            <div class="mbbPurityScatter"></div>
+                            <div class="hptPurityScatter"></div>
                         </md-card-content>
                     </md-card>
 
@@ -161,9 +172,23 @@
                             </md-card-title-text>
                         </md-card-title>
                         <md-card-content>
-                            <div class="mbbSignificanceScatter"></div>
+                            <div class="hptSignificanceScatter"></div>
                         </md-card-content>
                     </md-card>
+
+                    <md-card>
+                        <div>
+                            insert something which watches the cut value and prints the current significance and purity
+                        </div>
+                        <div layout="column">
+                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.hptPurityScatter', 'hpt')">Check Purity</md-button>
+                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.hptSignificanceScatter', 'hpt')">Check Significance</md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('hpt', '.hptPurityScatter')">Reveal purity points</md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('hpt', '.hptSignificanceScatter')">Reveal significance points</md-button>
+                        </div>
+                        <md-button  class="md-raised md-warn" ng-click="showDialog($event)">Finalise cut selection</md-button>
+                    </md-card>
+
                 </div>
             </md-content>
         </md-tab>
@@ -189,11 +214,11 @@
                     <md-card>
                         <md-card-title>
                             <md-card-title-text>
-                                <span class="md-headline">mbb signal purity plot</span>
+                                <span class="md-headline">taupt signal purity plot</span>
                             </md-card-title-text>
                         </md-card-title>
                         <md-card-content layout-align="center center">
-                            <div class="mbbPurityScatter"></div>
+                            <div class="tauptPurityScatter"></div>
                         </md-card-content>
                     </md-card>
 
@@ -204,8 +229,21 @@
                             </md-card-title-text>
                         </md-card-title>
                         <md-card-content>
-                            <div class="mbbSignificanceScatter"></div>
+                            <div class="tauptSignificanceScatter"></div>
                         </md-card-content>
+                    </md-card>
+
+                    <md-card>
+                        <div>
+                            insert something which watches the cut value and prints the current significance and purity
+                        </div>
+                        <div layout="column">
+                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.tauptPurityScatter', 'taupt')">Check Purity</md-button>
+                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.tauptSignificanceScatter', 'taupt')">Check Significance</md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('taupt', '.tauptPurityScatter')">Reveal purity points</md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('taupt', '.tauptSignificanceScatter')">Reveal significance points</md-button>
+                        </div>
+                        <md-button  class="md-raised md-warn" ng-click="showDialog($event)">Finalise cut selection</md-button>
                     </md-card>
                 </div>
             </md-content>
