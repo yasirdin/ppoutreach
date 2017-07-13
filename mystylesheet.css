@@ -249,3 +249,7 @@ input[type=range] {
 [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none;
 }
+
+.analysis-button {
+    height: 100px;
+}

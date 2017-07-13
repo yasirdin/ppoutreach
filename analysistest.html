@@ -2,6 +2,12 @@
 
     <md-card>
         <md-card-title>
+
+        </md-card-title>
+    </md-card>
+
+    <md-card>
+        <md-card-title>
             <h1>Introduction</h1>
         </md-card-title>
         <md-card-content>
@@ -61,18 +67,14 @@
                     </md-card>
 
                     <md-card>
-                        <div>
-                            insert something which watches the cut value and prints the current significance and purity
+                        <div layout="column" flex>
+                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.mbbPurityScatter', 'mbb')"><h1>check purity</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.mbbSignificanceScatter', 'mbb')"><h1>check significance</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('mbb', '.mbbPurityScatter')"><h1>reveal purity points</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('mbb', '.mbbSignificanceScatter')"><h1>reveal significance points</h1></md-button>
                         </div>
-                        <div layout="column">
-                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.mbbPurityScatter', 'mbb')">Check Purity</md-button>
-                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.mbbSignificanceScatter', 'mbb')">Check Significance</md-button>
-                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('mbb', '.mbbPurityScatter')">Reveal purity points</md-button>
-                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('mbb', '.mbbSignificanceScatter')">Reveal significance points</md-button>
-                        </div>
-                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('mbb')">Finalise cut selection</md-button>
+                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('mbb')"><h1>finalise cut selection</h1></md-button>
                     </md-card>
-
                 </div>
             </md-content>
         </md-tab>
@@ -119,16 +121,13 @@
                     </md-card>
 
                     <md-card>
-                        <div>
-                            insert something which watches the cut value and prints the current significance and purity
+                        <div layout="column" flex>
+                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.drPurityScatter', 'dr')"><h1>check purity</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.drSignificanceScatter', 'dr')"><h1>check significance</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('dr', '.drPurityScatter')"><h1>reveal purity points</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('dr', '.drSignificanceScatter')"><h1>reveal significance points</h1></md-button>
                         </div>
-                        <div layout="column">
-                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.drPurityScatter', 'dr')">Check Purity</md-button>
-                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.drSignificanceScatter', 'dr')">Check Significance</md-button>
-                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('dr', '.drPurityScatter')">Reveal purity points</md-button>
-                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('dr', '.drSignificanceScatter')">Reveal significance points</md-button>
-                        </div>
-                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('dr')">Finalise cut selection</md-button>
+                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('dr')"><h1>finalise cut selection</h1></md-button>
                     </md-card>
 
                 </div>
@@ -177,16 +176,13 @@
                     </md-card>
 
                     <md-card>
-                        <div>
-                            insert something which watches the cut value and prints the current significance and purity
+                        <div layout="column" flex>
+                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.hptPurityScatter', 'hpt')"><h1>check purity</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.hptSignificanceScatter', 'hpt')"><h1>check significance</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('hpt', '.hptPurityScatter')"><h1>reveal purity points</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('hpt', '.hptSignificanceScatter')"><h1>reveal significance points</h1></md-button>
                         </div>
-                        <div layout="column">
-                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.hptPurityScatter', 'hpt')">Check Purity</md-button>
-                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.hptSignificanceScatter', 'hpt')">Check Significance</md-button>
-                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('hpt', '.hptPurityScatter')">Reveal purity points</md-button>
-                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('hpt', '.hptSignificanceScatter')">Reveal significance points</md-button>
-                        </div>
-                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('hpt')">Finalise cut selection</md-button>
+                        <md-button class="md-raised md-warn" ng-click="finaliseCut('hpt')"><h1>finalise cut selection</h1></md-button>
                     </md-card>
 
                 </div>
@@ -234,23 +230,21 @@
                     </md-card>
 
                     <md-card>
-                        <div>
-                            insert something which watches the cut value and prints the current significance and purity
-                        </div>
                         <div layout="column">
-                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.tauptPurityScatter', 'taupt')">Check Purity</md-button>
-                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.tauptSignificanceScatter', 'taupt')">Check Significance</md-button>
-                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('taupt', '.tauptPurityScatter')">Reveal purity points</md-button>
-                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('taupt', '.tauptSignificanceScatter')">Reveal significance points</md-button>
+                            <md-button class="md-raised md-primary" ng-click="purityPlotPoint('.tauptPurityScatter', 'taupt')"><h1>check purity</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="significancePlotPoint('.tauptSignificanceScatter', 'taupt')"><h1>check significance</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealPurityPoints('taupt', '.tauptPurityScatter')"><h1>reveal purity points</h1></md-button>
+                            <md-button class="md-raised md-primary" ng-click="revealSigPoints('taupt', '.tauptSignificanceScatter')"><h1>reveal significance points</h1></md-button>
                         </div>
-                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('taupt')">Finalise cut selection</md-button>
+                        <md-button  class="md-raised md-warn" ng-click="finaliseCut('taupt')"><h1>finalise cut selection</h1></md-button>
                     </md-card>
                 </div>
             </md-content>
+            <md-button class="md-raised md-primary" ng-click="go('/analysistwo')">Move on to sensitivity exercise</md-button>
         </md-tab>
 
     </md-tabs>
 
     <md-button class="md-raised md-primary" ng-click="go('/report')">Write Report</md-button>
-    <md-button class="md-raised md-primary" ng-click="go('/analysistwo')">Sensitivity Exercise</md-button>
+
 </div>

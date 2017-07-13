@@ -364,6 +364,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
 
             //3. calculate purity and significance given sigcount and bgcount
 
+            //purity is the percentage of data that is signal: signalcount/(signalcount+backgrouncount)
             //PURITY//:
             var purity = sigCount / (sigCount + bgCount) * 100;
             var purity = purity.toFixed(2);
@@ -375,6 +376,7 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
 
             purityArray.push(purity);
 
+            //significance: is the denominator of purity square-rooted.
             //SIGNIFICANCE//:
             var significance = sigCount / Math.sqrt((sigCount + bgCount) * 100);
             var significance = significance.toFixed(2);
@@ -595,9 +597,12 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
             .attr("cy", function(d) { return y(d[2]) })
     };
 
+    //placeholder for programmatically switching tabs:
     $scope.selectedTab = null;
 
     $scope.finaliseCut = function(varName) {
+
+        //TODO: contain the below logic inside of an 'if' statement which checks that student has attempted to find the purity and signif
 
         var confirm = $mdDialog.confirm()
             .title('Would you like to finalise your cut selection?')
@@ -609,18 +614,23 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
             .then(function() {
                 var finalVal = $scope.newSelection[varName];
 
-                console.log(finalVal);
-
                 //store finalised cut value in $scope.finalisedCuts
                 $scope.finalisedCuts[varName] = finalVal;
 
                 console.log($scope.finalisedCuts);
 
-                //switching to the next tab:
-                $scope.selectedTab = ($scope.selectedTab + 1) % 4;
+                console.log($scope.selectedTab);
+
+                //check if last tab - so switch doesn't occur:
+                if ($scope.selectedTab === 3) {
+                    //do nothing if last tab
+                    return;
+                }
+
+                else {
+                    $scope.selectedTab = ($scope.selectedTab + 1) % 4;
+                }
             });
-
-
     };
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -666,7 +676,6 @@ ppoutreach.controller("analysisTestController", ['$scope', '$location', '$mdDial
             $scope.combineData($scope.drSig, $scope.drBg, "dr");
             $scope.combineData($scope.hptSig, $scope.hptBg, "hpt");
             $scope.combineData($scope.tauptSig, $scope.tauptBg, "taupt");
-
 
             $scope.mbbCombinedData = $scope.combinedData["mbb"].data;
             $scope.drCombinedData = $scope.combinedData["dr"].data;
